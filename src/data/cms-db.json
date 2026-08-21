@@ -1,0 +1,1208 @@
+{
+  "settings": {
+    "siteName": "Yazarkasa Satışı & Ödeme Teknolojileri",
+    "tagline": "Hugin, Ingenico, Paygo, Inpos Yetkili Satış & Servis",
+    "logoUrl": "https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg",
+    "faviconUrl": "/favicon.ico",
+    "primaryColor": "#2563eb",
+    "accentColor": "#1e3a8a",
+    "colorPreset": "corporate-blue",
+    "layoutDensity": "spacious",
+    "cardStyle": "soft-border",
+    "phone": "+90 530 417 15 65",
+    "phoneFormatted": "0530 417 15 65",
+    "email": "info@yazarkasasatisi.com",
+    "address": "Muratpaşa Mah. Abdi İpekçi Cad. No:12/A Bayrampaşa / İstanbul",
+    "workingHours": "Pzt - Cmt: 08:30 - 19:30 | 7/24 Teknik Servis",
+    "socialLinks": {
+      "whatsapp": "https://wa.me/905304171565",
+      "telegram": "https://t.me/yazarkasasatisi",
+      "instagram": "https://instagram.com/yazarkasasatisi",
+      "linkedin": "https://linkedin.com/company/yazarkasasatisi",
+      "youtube": "https://youtube.com/yazarkasasatisi"
+    },
+    "currency": "₺",
+    "language": "TR",
+    "activeTheme": "light",
+    "topbarText": "✓ BİLGİ FİŞİ DÖNEMİ SONA ERİYOR • e-FATURA VE e-ARŞİV FATURA DÖNEMİ BAŞLIYOR!",
+    "headerStyle": "standard",
+    "footerStyle": "full",
+    "showQuickContactButtons": true,
+    "quickContactPosition": "left",
+    "quickContactPhone": "0530 417 15 65",
+    "quickContactWhatsapp": "905304171565",
+    "quickContactMessage": "Merhaba, POS cihazları ve ödeme çözümleri hakkında hızlı bilgi almak istiyorum.",
+    "logoHeight": 40,
+    "showLogoText": true
+  },
+  "homeSections": [
+    {
+      "0": {
+        "0": {
+          "id": "hero",
+          "name": "01. Hero Cihaz Vitrini (3D Slider)",
+          "order": 1,
+          "enabled": true,
+          "description": "Ana sayfanın en üstündeki 3D interaktif POS cihazı sahnesi ve öne çıkan rozetler."
+        },
+        "1": {
+          "id": "products",
+          "name": "02. Öne Çıkan POS Cihazları Kataloğu",
+          "order": 2,
+          "enabled": false,
+          "description": "Sektörlere ve kategorilere göre filtrelemeli devasa POS cihazı vitrini."
+        },
+        "2": {
+          "id": "intro",
+          "name": "03. Kurumsal Tanıtım Görsel Bannerı",
+          "order": 3,
+          "enabled": true,
+          "description": "Büyük tanıtım fotoğrafı, BDDK rozeti ve öne çıkan özellik kartları."
+        },
+        "3": {
+          "id": "services",
+          "name": "04. Hizmet Portföyü (Görsel Kartlar)",
+          "order": 4,
+          "enabled": true,
+          "description": "Satış, kurulum, 7/24 teknik servis ve e-fatura danışmanlığı kartları."
+        },
+        "4": {
+          "id": "references",
+          "name": "05. Referans Marka Logoları",
+          "order": 5,
+          "enabled": true,
+          "description": "Türkiye genelindeki kurumsal müşteri ve üye işyeri marka logoları."
+        },
+        "5": {
+          "id": "quote",
+          "name": "06. Hızlı İletişim & Teklif Al Formu",
+          "order": 6,
+          "enabled": true,
+          "description": "Müşterilerin anında fiyat ve kurulum teklifi isteyebileceği canlı form."
+        },
+        "6": {
+          "id": "whyUs",
+          "name": "07. Neden Yazarkasa Satışı (Özellikler)",
+          "order": 7,
+          "enabled": false,
+          "description": "Ruhsatlandırma, ikame cihaz ve banka entegrasyonu detay özellikleri."
+        },
+        "7": {
+          "id": "faq",
+          "name": "08. Sıkça Sorulan Sorular (SSS)",
+          "order": 8,
+          "enabled": false,
+          "description": "Yazarkasa kullanımı ve mali mevzuatlar hakkındaki akordeon sorular."
+        },
+        "8": {
+          "id": "blog",
+          "name": "09. Sektörel Blog & Haberler",
+          "order": 9,
+          "enabled": false,
+          "description": "GİB yeni nesil yazarkasa ve mali duyurular blog kartları."
+        },
+        "id": "homeSections-1787324405900"
+      },
+      "1": {
+        "id": "hero",
+        "name": "01. Hero Cihaz Vitrini (3D Slider)",
+        "order": 1,
+        "enabled": true,
+        "description": "Ana sayfanın en üstündeki 3D interaktif POS cihazı sahnesi ve öne çıkan rozetler."
+      },
+      "2": {
+        "id": "products",
+        "name": "02. Öne Çıkan POS Cihazları Kataloğu",
+        "order": 2,
+        "enabled": false,
+        "description": "Sektörlere ve kategorilere göre filtrelemeli devasa POS cihazı vitrini."
+      },
+      "3": {
+        "id": "intro",
+        "name": "03. Kurumsal Tanıtım Görsel Bannerı",
+        "order": 3,
+        "enabled": true,
+        "description": "Büyük tanıtım fotoğrafı, BDDK rozeti ve öne çıkan özellik kartları."
+      },
+      "4": {
+        "id": "services",
+        "name": "04. Hizmet Portföyü (Görsel Kartlar)",
+        "order": 4,
+        "enabled": true,
+        "description": "Satış, kurulum, 7/24 teknik servis ve e-fatura danışmanlığı kartları."
+      },
+      "5": {
+        "id": "references",
+        "name": "05. Referans Marka Logoları",
+        "order": 5,
+        "enabled": true,
+        "description": "Türkiye genelindeki kurumsal müşteri ve üye işyeri marka logoları."
+      },
+      "6": {
+        "id": "quote",
+        "name": "06. Hızlı İletişim & Teklif Al Formu",
+        "order": 6,
+        "enabled": true,
+        "description": "Müşterilerin anında fiyat ve kurulum teklifi isteyebileceği canlı form."
+      },
+      "7": {
+        "id": "whyUs",
+        "name": "07. Neden Yazarkasa Satışı (Özellikler)",
+        "order": 7,
+        "enabled": false,
+        "description": "Ruhsatlandırma, ikame cihaz ve banka entegrasyonu detay özellikleri."
+      },
+      "8": {
+        "id": "faq",
+        "name": "08. Sıkça Sorulan Sorular (SSS)",
+        "order": 8,
+        "enabled": false,
+        "description": "Yazarkasa kullanımı ve mali mevzuatlar hakkındaki akordeon sorular."
+      },
+      "9": {
+        "id": "blog",
+        "name": "09. Sektörel Blog & Haberler",
+        "order": 9,
+        "enabled": false,
+        "description": "GİB yeni nesil yazarkasa ve mali duyurular blog kartları."
+      },
+      "id": "homeSections-1787324426952"
+    },
+    {
+      "0": {
+        "id": "hero",
+        "name": "01. Hero Cihaz Vitrini (3D Slider)",
+        "order": 1,
+        "enabled": true,
+        "description": "Ana sayfanın en üstündeki 3D interaktif POS cihazı sahnesi ve öne çıkan rozetler."
+      },
+      "1": {
+        "id": "products",
+        "name": "02. Öne Çıkan POS Cihazları Kataloğu",
+        "order": 2,
+        "enabled": false,
+        "description": "Sektörlere ve kategorilere göre filtrelemeli devasa POS cihazı vitrini."
+      },
+      "2": {
+        "id": "intro",
+        "name": "03. Kurumsal Tanıtım Görsel Bannerı",
+        "order": 3,
+        "enabled": true,
+        "description": "Büyük tanıtım fotoğrafı, BDDK rozeti ve öne çıkan özellik kartları."
+      },
+      "3": {
+        "id": "services",
+        "name": "04. Hizmet Portföyü (Görsel Kartlar)",
+        "order": 4,
+        "enabled": true,
+        "description": "Satış, kurulum, 7/24 teknik servis ve e-fatura danışmanlığı kartları."
+      },
+      "4": {
+        "id": "references",
+        "name": "05. Referans Marka Logoları",
+        "order": 5,
+        "enabled": true,
+        "description": "Türkiye genelindeki kurumsal müşteri ve üye işyeri marka logoları."
+      },
+      "5": {
+        "id": "quote",
+        "name": "06. Hızlı İletişim & Teklif Al Formu",
+        "order": 6,
+        "enabled": true,
+        "description": "Müşterilerin anında fiyat ve kurulum teklifi isteyebileceği canlı form."
+      },
+      "6": {
+        "id": "whyUs",
+        "name": "07. Neden Yazarkasa Satışı (Özellikler)",
+        "order": 7,
+        "enabled": false,
+        "description": "Ruhsatlandırma, ikame cihaz ve banka entegrasyonu detay özellikleri."
+      },
+      "7": {
+        "id": "faq",
+        "name": "08. Sıkça Sorulan Sorular (SSS)",
+        "order": 8,
+        "enabled": false,
+        "description": "Yazarkasa kullanımı ve mali mevzuatlar hakkındaki akordeon sorular."
+      },
+      "8": {
+        "id": "blog",
+        "name": "09. Sektörel Blog & Haberler",
+        "order": 9,
+        "enabled": false,
+        "description": "GİB yeni nesil yazarkasa ve mali duyurular blog kartları."
+      },
+      "id": "homeSections-1787324405900"
+    },
+    {
+      "id": "hero",
+      "name": "01. Hero Cihaz Vitrini (3D Slider)",
+      "order": 1,
+      "enabled": true,
+      "description": "Ana sayfanın en üstündeki 3D interaktif POS cihazı sahnesi ve öne çıkan rozetler."
+    },
+    {
+      "id": "products",
+      "name": "02. Öne Çıkan POS Cihazları Kataloğu",
+      "order": 2,
+      "enabled": false,
+      "description": "Sektörlere ve kategorilere göre filtrelemeli devasa POS cihazı vitrini."
+    },
+    {
+      "id": "intro",
+      "name": "03. Kurumsal Tanıtım Görsel Bannerı",
+      "order": 3,
+      "enabled": true,
+      "description": "Büyük tanıtım fotoğrafı, BDDK rozeti ve öne çıkan özellik kartları."
+    },
+    {
+      "id": "services",
+      "name": "04. Hizmet Portföyü (Görsel Kartlar)",
+      "order": 4,
+      "enabled": true,
+      "description": "Satış, kurulum, 7/24 teknik servis ve e-fatura danışmanlığı kartları."
+    },
+    {
+      "id": "references",
+      "name": "05. Referans Marka Logoları",
+      "order": 5,
+      "enabled": true,
+      "description": "Türkiye genelindeki kurumsal müşteri ve üye işyeri marka logoları."
+    },
+    {
+      "id": "quote",
+      "name": "06. Hızlı İletişim & Teklif Al Formu",
+      "order": 6,
+      "enabled": true,
+      "description": "Müşterilerin anında fiyat ve kurulum teklifi isteyebileceği canlı form."
+    },
+    {
+      "id": "whyUs",
+      "name": "07. Neden Yazarkasa Satışı (Özellikler)",
+      "order": 7,
+      "enabled": false,
+      "description": "Ruhsatlandırma, ikame cihaz ve banka entegrasyonu detay özellikleri."
+    },
+    {
+      "id": "faq",
+      "name": "08. Sıkça Sorulan Sorular (SSS)",
+      "order": 8,
+      "enabled": false,
+      "description": "Yazarkasa kullanımı ve mali mevzuatlar hakkındaki akordeon sorular."
+    },
+    {
+      "id": "blog",
+      "name": "09. Sektörel Blog & Haberler",
+      "order": 9,
+      "enabled": false,
+      "description": "GİB yeni nesil yazarkasa ve mali duyurular blog kartları."
+    }
+  ],
+  "menu": [
+    {
+      "id": "1",
+      "label": "Ana Sayfa",
+      "href": "/",
+      "order": 1,
+      "isVisible": true
+    },
+    {
+      "id": "2",
+      "label": "POS Cihazları",
+      "href": "/pos-cihazlari",
+      "order": 2,
+      "isVisible": true,
+      "isMegaMenu": true,
+      "badge": "",
+      "badgeColor": "bg-blue-600 text-white"
+    },
+    {
+      "id": "3",
+      "label": "Hizmetler",
+      "href": "/hizmetler",
+      "order": 3,
+      "isVisible": true
+    },
+    {
+      "id": "4",
+      "label": "Çözümler",
+      "href": "/cozumler",
+      "order": 4,
+      "isVisible": true,
+      "badge": "",
+      "badgeColor": "bg-emerald-600 text-white"
+    },
+    {
+      "id": "5",
+      "label": "Referanslar",
+      "href": "/kurumsal/referanslar",
+      "order": 5,
+      "isVisible": true,
+      "badge": "",
+      "badgeColor": "bg-indigo-600 text-white"
+    },
+    {
+      "id": "6",
+      "label": "Projeler",
+      "href": "/projeler",
+      "order": 6,
+      "isVisible": true
+    },
+    {
+      "id": "7",
+      "label": "Kurumsal",
+      "href": "/kurumsal/hakkimizda",
+      "order": 7,
+      "isVisible": true
+    },
+    {
+      "id": "8",
+      "label": "İletişim",
+      "href": "/iletisim",
+      "order": 8,
+      "isVisible": true
+    }
+  ],
+  "megaMenuConfig": {
+    "featuredProductId": "p1",
+    "spotlightBadge": "SEKTÖR ÖNCÜSÜ",
+    "spotlightTitle": "Hugin Tiger T300 4G Yazarkasa POS",
+    "spotlightDesc": "Ultra hızlı dokunmatik ekran, dahili termal yazıcı, 4G Wi-Fi ve GİB onaylı yeni nesil e-Fatura mali yazarkasa.",
+    "spotlightPriceText": "6.400 ₺ fiyat teklifi ile",
+    "spotlightCtaText": "Cihazı İncele & Sipariş Ver",
+    "spotlightCtaUrl": "/pos-cihazlari/hugin-tiger-t300-4g",
+    "bottomNoticeText": "Tüm cihazlarımız 2 yıl resmi Hugin, Ingenico, Paygo yetkili servis garantisi ve 24 saatte adrese teslimat ile gelir.",
+    "bottomNoticeLinkText": "Tüm POS Kataloğunu Gör",
+    "bottomNoticeLinkUrl": "/pos-cihazlari",
+    "categories": [
+      {
+        "id": "cat-1",
+        "title": "Yazarkasa POS (ÖKC)",
+        "desc": "GİB ve mali mevzuatlara tam uyumlu mali hafızalı akıllı yazarkasalar.",
+        "iconName": "ShieldCheck",
+        "badge": "GİB Onaylı",
+        "href": "/pos-cihazlari?category=Yazarkasa+POS",
+        "colorBg": "bg-blue-50 text-blue-600"
+      },
+      {
+        "id": "cat-2",
+        "title": "Android POS",
+        "desc": "Dokunmatik ekranlı, akıllı işletim sistemli yeni nesil Android POS terminalleri.",
+        "iconName": "Smartphone",
+        "href": "/pos-cihazlari?category=Android+POS",
+        "badge": "Çok Satan",
+        "colorBg": "bg-indigo-50 text-indigo-600"
+      },
+      {
+        "id": "cat-3",
+        "title": "Mobil POS",
+        "desc": "Saha kuryeleri, restoran ve taşınabilir satış ekipleri için kablosuz cihazlar.",
+        "iconName": "CreditCard",
+        "href": "/pos-cihazlari?category=Mobil+POS",
+        "badge": "Hafif & Hızlı",
+        "colorBg": "bg-cyan-50 text-cyan-600"
+      },
+      {
+        "id": "cat-4",
+        "title": "Aksesuarlar & Yazıcılar",
+        "desc": "Barkod okuyucu, terazi, pinpad ve termal fiş yazıcı yedek parçaları.",
+        "iconName": "Monitor",
+        "badge": "Tam Set",
+        "href": "/pos-cihazlari?category=Aksesuarlar",
+        "colorBg": "bg-sky-50 text-sky-600"
+      }
+    ]
+  },
+  "heroSlides": [
+    {
+      "id": "slide-1",
+      "title": "BİLGİ FİŞİ DÖNEMİ SONA ERİYOR",
+      "subtitle": "e-Fatura & e-Arşiv Uyumlu Yazarkasa POS",
+      "badge": "GİB ONAYLI SEKTÖR ÖNCÜSÜ",
+      "description": "Hugin, Ingenico, Paygo, Inpos, Pax ve Beko marka GİB onaylı yeni nesil mali POS cihazlarında 24 saatte adresinizde kurulum garantisi.",
+      "posName": "Hugin Tiger T300 4G POS",
+      "imageUrl": "https://www.yazarkasasatisi.com/upload/productsImage/300x300/hugintigert300.jpg",
+      "primaryCtaText": "Cihazı İncele & Sipariş Ver",
+      "primaryCtaUrl": "/pos-cihazlari/hugin-tiger-t300-4g",
+      "secondaryCtaText": "Hemen Teklif Al",
+      "secondaryCtaUrl": "/iletisim",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "slide-2",
+      "title": "PAX & PAYGO YENİ NESİL ANDROID POS",
+      "subtitle": "Hızlı, Dokunmatik & Taşınabilir",
+      "badge": "EN ÇOK TERCİH EDİLEN",
+      "description": "Android işletim sistemli akıllı POS terminalleri ile stok takibi yapın, temassız ödeme alın ve e-faturanızı anında kesin.",
+      "posName": "Pax A910SF Android POS",
+      "imageUrl": "https://www.yazarkasasatisi.com/upload/productsImage/300x300/pax910p.png",
+      "primaryCtaText": "Android POS Kataloğu",
+      "primaryCtaUrl": "/pos-cihazlari?category=Android+POS",
+      "secondaryCtaText": "Detaylı Bilgi Al",
+      "secondaryCtaUrl": "/iletisim",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "slide-3",
+      "title": "ÖDEAL & E-İMZA ENTEGRASYONLU ÇÖZÜMLER",
+      "subtitle": "Taahhütsüz & Şeffaf Komisyon",
+      "badge": "FIRSAT KAMPANYASI",
+      "description": "Ödeal altyapısı ve e-İmza onay adımları ile tüm banka kartlarından tek cihazla düşük komisyonla ödeme almaya hemen başlayın.",
+      "posName": "Paygo SP630 ECR Pro",
+      "imageUrl": "https://www.yazarkasasatisi.com/upload/productsImage/300x300/Paygosp630ecrpro1.jpg",
+      "primaryCtaText": "Ödeal Uyumlu POS'lar",
+      "primaryCtaUrl": "/cozumler",
+      "secondaryCtaText": "Bizimle İletişime Geçin",
+      "secondaryCtaUrl": "/iletisim",
+      "order": 3,
+      "isActive": true
+    }
+  ],
+  "trustStats": [
+    {
+      "id": "1",
+      "number": "15.000+",
+      "label": "Aktif İşletme Referansı",
+      "desc": "Türkiye genelinde 81 ilde hizmet",
+      "order": 1
+    },
+    {
+      "id": "2",
+      "number": "24 Saat",
+      "label": "Adreste Yetkili Kurulum Süresi",
+      "desc": "Ruhsatlandırma ve banka yüklemeleri dahil",
+      "order": 2
+    },
+    {
+      "id": "3",
+      "number": "81 İl",
+      "label": "Kesintisiz Servis & Destek Ağı",
+      "desc": "Bayrampaşa yetkili servis ve ikame garantisi",
+      "order": 3
+    },
+    {
+      "id": "4",
+      "number": "%100",
+      "label": "GİB & BDDK Sertifikasyon",
+      "desc": "Yeni nesil mali ÖKC mevzuatına tam uygunluk",
+      "order": 4
+    }
+  ],
+  "corporateIntro": {
+    "badge": "YAZARKASA SATIŞI & TEKNİK SERVİS",
+    "title": "Yeni Nesil Ödeme Teknolojilerinde Güvenilir Çözüm Ortağınız.",
+    "description": "Yazarkasa Satışı (DR Barkod) olarak Hugin, Ingenico, Paygo, Inpos, Pax, Beko ve Cas yetkili satış ve servis noktası olarak işletmenizin yanındayız.",
+    "bulletPoints": [
+      "%100 Mali Mevzuat ve GİB Uyumluluğu",
+      "24 Saatte Adresinizde Yetkili Kurulum",
+      "7/24 Telefon ve Kesintisiz İkame Desteği",
+      "Ödeal ve Tüm Bankalarla Entegre Altyapı"
+    ],
+    "imageUrl": "/images/corporate-intro-demo.jpg",
+    "imageBadge": "BDDK & PCI-PTS 6.X",
+    "imageTitle": "Saha & Restoran Kullanımına Tam Uyumlu",
+    "imageDesc": "Yüksek kaliteli termal yazıcı ve dokunmatik cam ekran.",
+    "card1Title": "Ultra Hızlı İşlem",
+    "card1Desc": "Milisaniyeler içinde temassız ödeme.",
+    "card2Title": "%100 Güvenli Altyapı",
+    "card2Desc": "Uçtan uca P2PE şifrelenmiş veri iletimi."
+  },
+  "cloudPanel": {
+    "badge": "CANLI SERVİS & AKTİVASYON",
+    "title": "Ödeal & GİB e-Fatura Bulut Yönetimi",
+    "description": "Cihazlarınız üzerinden geçen tüm işlemleri ve e-fatura hareketlerini tek ekrandan 7/24 canlı takip edin.",
+    "todayRevenue": "24.500 ₺",
+    "todayGrowth": "+18.4%",
+    "activeDevicesCount": "15.420",
+    "uptimePercent": "99.98%",
+    "txSpeed": "0.4 sn"
+  },
+  "products": [
+    {
+      "id": "p1",
+      "name": "Hugin Tiger T300 4G Yazarkasa POS",
+      "slug": "hugin-tiger-t300-4g",
+      "category": "Yazarkasa POS",
+      "price": 6400,
+      "oldPrice": 7200,
+      "isDiscounted": true,
+      "discountLabel": "%11 İNDİRİM",
+      "sku": "HUG-T300-4G",
+      "brand": "Hugin",
+      "inStock": true,
+      "isFeatured": true,
+      "order": 1,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/hugintigert300.jpg"
+      ],
+      "shortDesc": "4G bağlantı destekli, ergonomik dokunmatik ekranlı GİB onaylı yeni nesil mobil mali yazarkasa POS.",
+      "fullDesc": "Hugin Tiger T300 4G, gelişmiş batarya kapasitesi, yüksek dokunmatik çözünürlüğü ve hızlı termal yazıcısı ile restoran, mağaza ve saha satışları için mükemmel çözümdür.",
+      "features": [
+        "4G & Wi-Fi Çift İletişim",
+        "GİB & BDDK Onaylı Mali Hafıza",
+        "Tüm Banka Uygulamaları Yüklenebilir",
+        "Dahili Hızlı Termal Yazıcı"
+      ],
+      "specs": {
+        "display": "3.5 inç Renkli Dokunmatik",
+        "os": "Hugin Mali OS",
+        "connectivity": "4G / Wi-Fi / GPRS",
+        "nfc": "Var (%100 Temassız)",
+        "printer": "Hızlı Termal Yazıcı (58mm)",
+        "battery": "5200 mAh Yüksek Kapasite",
+        "weight": "420 gram",
+        "security": "PCI-PTS 6.x & GİB Onaylı"
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Inpos M530 Mobil Yazarkasa POS",
+      "slug": "inpos-m530-mobil-yazarkasa-pos",
+      "category": "Yazarkasa POS",
+      "price": 6999.99,
+      "oldPrice": 7800,
+      "isDiscounted": true,
+      "discountLabel": "ÇOK SATAN",
+      "sku": "INP-M530",
+      "brand": "Inpos",
+      "inStock": true,
+      "isFeatured": true,
+      "order": 2,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/inposm5301.jpg"
+      ],
+      "shortDesc": "Hızlı temassız ödeme alma, yüksek batarya süresi ve taşınabilir hafif tasarım.",
+      "fullDesc": "Inpos M530 Mobil Yazarkasa POS, sahada ve kapıda ödeme alan işletmeler için özel olarak tasarlanmış dayanıklı ve hızlı ödeme terminalidir.",
+      "features": [
+        "Temassız ve QR Kod Ödeme",
+        "Uzun Ömürlü Batarya",
+        "GİB Onaylı Resmi Yazarkasa",
+        "24 Saatte Kurulum"
+      ],
+      "specs": {
+        "display": "2.8 inç Dokunmatik",
+        "os": "Inpos Mali OS",
+        "connectivity": "4G / GPRS",
+        "nfc": "Var",
+        "printer": "Termal Fiş Yazıcı",
+        "battery": "4000 mAh",
+        "weight": "380 gram",
+        "security": "GİB & BDDK Sertifikalı"
+      }
+    },
+    {
+      "id": "p3",
+      "name": "Paygo SP630 ECR 4G Pro Yazarkasa POS",
+      "slug": "paygo-sp630-ecr-4g-pro",
+      "category": "Yazarkasa POS",
+      "price": 6950,
+      "oldPrice": 7500,
+      "isDiscounted": true,
+      "discountLabel": "PRO PERFORMANS",
+      "sku": "PYG-SP630-PRO",
+      "brand": "Paygo",
+      "inStock": true,
+      "isFeatured": true,
+      "order": 3,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/Paygosp630ecrpro1.jpg"
+      ],
+      "shortDesc": "Pro işlemci gücü, kesintisiz 4G modem ve ergonomik yapısı ile hızlı ödeme.",
+      "fullDesc": "Paygo SP630 ECR 4G Pro, yüksek işlem gücü ve Ödeal uyumluluğu sayesinde işletmelerin en hızlı ödeme almasını sağlayan yeni nesil yazarkasadır.",
+      "features": [
+        "Pro İşlemci Mimarisi",
+        "Ödeal ile Düşük Komisyon",
+        "Dahili Temassız Okuyucu",
+        "Darbeye Dayanıklı Gövde"
+      ],
+      "specs": {
+        "display": "3.2 inç Renkli Ekran",
+        "os": "Paygo OS",
+        "connectivity": "4G Pro Modem",
+        "nfc": "Var",
+        "printer": "Yüksek Hızlı Termal",
+        "battery": "5000 mAh",
+        "weight": "400 gram",
+        "security": "PCI-PTS 6.x"
+      }
+    },
+    {
+      "id": "p4",
+      "name": "Ingenico Move 5000F Mobil Yazarkasa POS",
+      "slug": "ingenico-move-5000f-mobil-pos",
+      "category": "Mobil POS",
+      "price": 24000,
+      "oldPrice": 26000,
+      "isDiscounted": true,
+      "discountLabel": "PRESTİJ MODEL",
+      "sku": "ING-MOVE-5000F",
+      "brand": "Ingenico",
+      "inStock": true,
+      "isFeatured": false,
+      "order": 4,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/ingenico_move.jpg"
+      ],
+      "shortDesc": "Dünyanın önde gelen Ingenico teknolojisi ile ultra yüksek güvenlikli ve prestijli taşınabilir POS.",
+      "fullDesc": "Ingenico Move 5000F, en zorlu saha şartlarında dahi yüksek performans veren, Telium TETRA güvenlik mimarisine sahip dünya lideri mali yazarkasa POS cihazıdır.",
+      "features": [
+        "Ingenico Telium TETRA Güvenliği",
+        "Büyük Geniş Dokunmatik Ekran",
+        "Tüm Bankalarla Entegre",
+        "Yüksek Baskı Hızlı Termal Yazıcı"
+      ],
+      "specs": {
+        "display": "3.5 inç HD Dokunmatik",
+        "os": "Telium TETRA",
+        "connectivity": "4G / Wi-Fi / Bluetooth",
+        "nfc": "Var",
+        "printer": "Süper Hızlı Termal",
+        "battery": "6000 mAh",
+        "weight": "450 gram",
+        "security": "PCI-PTS 5.x / Telium TETRA"
+      }
+    },
+    {
+      "id": "p5",
+      "name": "Hugin S1 Android Yazarkasa POS",
+      "slug": "hugin-s1-android-yazarkasa-pos",
+      "category": "Android POS",
+      "price": 7500,
+      "oldPrice": 8500,
+      "isDiscounted": true,
+      "discountLabel": "ANDROİD AKILLI",
+      "sku": "HUG-S1-AND",
+      "brand": "Hugin",
+      "inStock": true,
+      "isFeatured": true,
+      "order": 5,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/HuginS1AndoridYazarkasaPos.jpg"
+      ],
+      "shortDesc": "Android işletim sistemli, akıllı sipariş ve otomasyon uygulamaları destekli Android POS.",
+      "fullDesc": "Hugin S1 Android Yazarkasa POS, akıllı ekranı sayesinde restoran ve perakende otomasyon programları ile tam entegre çalışarak mali fiş ve e-Fatura keser.",
+      "features": [
+        "Android İşletim Sistemi",
+        "Stok & Restoran Programı Desteği",
+        "e-Fatura & e-Arşiv Dahili",
+        "Hızlı Dokunmatik"
+      ],
+      "specs": {
+        "display": "5.5 inç HD Dokunmatik",
+        "os": "Android 10",
+        "connectivity": "4G / Wi-Fi",
+        "nfc": "Var",
+        "printer": "Termal Fiş Yazıcı",
+        "battery": "5000 mAh",
+        "weight": "460 gram",
+        "security": "GİB & BDDK Onaylı"
+      }
+    },
+    {
+      "id": "p6",
+      "name": "Pax A910SF Yeni Nesil Android POS Yazarkasa",
+      "slug": "pax-a910sf-yeni-nesil-android-pos",
+      "category": "Android POS",
+      "price": 8950,
+      "oldPrice": 9800,
+      "isDiscounted": true,
+      "discountLabel": "TEKNOLOJİ LİDERİ",
+      "sku": "PAX-A910SF",
+      "brand": "Pax",
+      "inStock": true,
+      "isFeatured": true,
+      "order": 6,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/pax910p.png"
+      ],
+      "shortDesc": "Pax güvencesiyle yüksek batarya kapasiteli ve ergonomik tasarımlı akıllı Android terminal.",
+      "fullDesc": "Pax A910SF, gelişmiş kamera ile 1D/2D barkod okuma yeteneğine sahip, sezgisel arayüzlü ve dayanıklı yeni nesil Android ödeme cihazıdır.",
+      "features": [
+        "Dahili Barkod & QR Okuyucu Kamera",
+        "Yüksek Kapasiteli Güçlü Pil",
+        "Çift SIM & 4G Desteği",
+        "Şık Ergonomik Tasarım"
+      ],
+      "specs": {
+        "display": "5.0 inç IPS Dokunmatik",
+        "os": "PayDroid (Android)",
+        "connectivity": "4G / Wi-Fi / Bluetooth",
+        "nfc": "Var",
+        "printer": "58mm Termal",
+        "battery": "5250 mAh",
+        "weight": "410 gram",
+        "security": "PCI-PTS 6.x"
+      }
+    },
+    {
+      "id": "p7",
+      "name": "Cas CL3000 Barkodlu Terazi (15/30 KG)",
+      "slug": "cas-cl3000-barkodlu-terazi",
+      "category": "Aksesuarlar",
+      "price": 24500,
+      "oldPrice": 27000,
+      "isDiscounted": true,
+      "discountLabel": "SANAYİ TİPİ",
+      "sku": "CAS-CL3000",
+      "brand": "CAS",
+      "inStock": true,
+      "isFeatured": false,
+      "order": 7,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/Cas_CL3000.png"
+      ],
+      "shortDesc": "Market, şarküteri ve kuruyemişçiler için etiket ve barkod baskılı sanayi tipi terazi.",
+      "fullDesc": "Cas CL3000, yüksek hafızalı ürün tuş takımı, hızlı etiket yazıcısı ve Ethernet haberleşme altyapısı ile perakende sektörünün en çok tercih edilen terazisidir.",
+      "features": [
+        "Etiket ve Fiş Baskı Özelliği",
+        "Ethernet & Ağ Haberleşmesi",
+        "Çift Taraflı Müşteri Ekranı",
+        "Sanayi ve Ticaret Bakanlığı Onaylı"
+      ],
+      "specs": {
+        "display": "Çift Göstergeli LCD",
+        "os": "CAS Embedded OS",
+        "connectivity": "Ethernet / RS232",
+        "nfc": "Yok",
+        "printer": "Termal Etiket Baskı",
+        "battery": "220V Şebeke Besleme",
+        "weight": "12 kg",
+        "security": "Sanayi Bakanlığı Onaylı"
+      }
+    },
+    {
+      "id": "p8",
+      "name": "Zywell Q822 Adisyon Fiş Yazıcı USB, ETH",
+      "slug": "zywell-q822-adisyon-fis-yazici",
+      "category": "Aksesuarlar",
+      "price": 2950,
+      "oldPrice": 3400,
+      "isDiscounted": true,
+      "discountLabel": "HIZLI MUTFAK",
+      "sku": "ZYW-Q822",
+      "brand": "Zywell",
+      "inStock": true,
+      "isFeatured": false,
+      "order": 8,
+      "images": [
+        "https://www.yazarkasasatisi.com/upload/productsImage/300x300/1232133.jpg"
+      ],
+      "shortDesc": "Mutfak ve kasa adisyon basımları için dayanıklı, hızlı ve sesli uyarılı fiş yazıcı.",
+      "fullDesc": "Zywell Q822, 260mm/sn yüksek baskı hızı, otomatik kağıt kesicisi ve Ethernet bağlantısı ile restoran otomasyonlarının vazgeçilmez termal fiş yazıcısıdır.",
+      "features": [
+        "260 mm/sn Yüksek Baskı Hızı",
+        "Otomatik Giyotin Kesici",
+        "Mutfak Sesli Uyarı Buzzerı",
+        "USB + Ethernet Çift Port"
+      ],
+      "specs": {
+        "display": "LED Durum İndikatörü",
+        "os": "Windows/Linux/Android Uyumlu",
+        "connectivity": "USB + Ethernet (LAN)",
+        "nfc": "Yok",
+        "printer": "80mm Termal (260mm/sn)",
+        "battery": "24V Güç Adaptörü",
+        "weight": "1.4 kg",
+        "security": "CE / FCC Sertifikalı"
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "s1",
+      "name": "Yazarkasa POS Yetkili Satış & Adreste Kurulum",
+      "slug": "yetkili-satis-kurulum",
+      "category": "Satış & Kurulum",
+      "iconName": "CreditCard",
+      "shortDesc": "Hugin, Ingenico, Paygo, Inpos, Pax ve Beko mali yazarkasa cihazlarında 24 saatte adresinizde kurulum.",
+      "fullDesc": "Yetkili bayi güvencesiyle satın aldığınız yazarkasa POS cihazınız, uzman teknik ekibimiz tarafından adresinize getirilerek ruhsatlandırma, sim kart aktivasyonu ve banka yüklemeleri yapılarak çalışır vaziyette teslim edilir.",
+      "features": [
+        "24 Saatte Adreste Teslimat",
+        "Ücretsiz Ruhsatlandırma ve Kayıt",
+        "Tüm Banka Yazılımlarının Yüklenmesi",
+        "Kullanıcı Eğitimi ve Destek"
+      ],
+      "benefits": [
+        "Veri Kaybı Yaşamadan Hızlı Geçiş",
+        "%100 Ruhsatlandırma Garantisi",
+        "Banka Tanımlama Desteği"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1556742049-0a67daf40d3a?q=80&w=800&auto=format&fit=crop"
+      ],
+      "order": 1
+    },
+    {
+      "id": "s2",
+      "name": "Ödeal & Düşük Komisyonlu Ödeme Altyapısı",
+      "slug": "odeal-odeme-altyapisi",
+      "category": "Ödeme Sistemleri",
+      "iconName": "Smartphone",
+      "shortDesc": "Tek cihazla tüm banka kartlarından %0.99’dan başlayan avantajlı komisyon oranlarıyla ödeme alın.",
+      "fullDesc": "Ödeal yetkili çözüm ortağı olarak, aylık sabit ücret ve ciro taahhüdü olmaksızın tüm kredi kartlarına taksit imkanı sunan ödeme altyapısını cihazınıza hızlıca tanımlıyoruz.",
+      "features": [
+        "Aylık Sabit Ücret Yok",
+        "Tüm Kartlara Taksit İmkânı",
+        "Ertesi Gün Banka Hesabına Geçiş",
+        "Taahhütsüz Esnek Kullanım"
+      ],
+      "benefits": [
+        "Komisyon Maliyetlerini Düşürür",
+        "Taahhütsüz Serbestlik",
+        "Tek Noktadan Muhasebe Raporu"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
+      ],
+      "order": 2
+    },
+    {
+      "id": "s3",
+      "name": "7/24 Kesintisiz Yerinde Teknik Servis & İkame",
+      "slug": "teknik-servis-destek",
+      "category": "Teknik Servis",
+      "iconName": "Headphones",
+      "shortDesc": "Arıza durumunda 2 saatte adrese ikame cihaz desteği ile satışlarınız asla yarım kalmaz.",
+      "fullDesc": "Bayrampaşa merkezli yetkili servis ekibimiz, cihaz arızalarında işletmenize anında müdahale ederek tamir süresince ikame yazarkasa POS cihazı sağlar.",
+      "features": [
+        "7/24 Telefon ve Canlı Destek",
+        "Geniş Orijinal Yedek Parça Stoğu",
+        "Arıza Durumunda Geçici İkame Cihaz",
+        "Periyodik Mali Hafıza Bakımı"
+      ],
+      "benefits": [
+        "Ciro Kaybı Yaşanmaz",
+        "Yetkili Orijinal Yedek Parça",
+        "İstanbul İçi 2 Saatte Müdahale"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop"
+      ],
+      "order": 3
+    },
+    {
+      "id": "s4",
+      "name": "e-Fatura & e-Arşiv Entegrasyon Danışmanlığı",
+      "slug": "e-fatura-e-arsiv-entegrasyonu",
+      "category": "Mali Danışmanlık",
+      "iconName": "QrCode",
+      "shortDesc": "GİB yeni nesil e-Fatura mevzuatına uygun hızlı başvuru ve e-İmza onay adımları desteği.",
+      "fullDesc": "Son mali düzenlemelerle zorunlu hale gelen e-Fatura ve e-Arşiv geçiş süreçlerinizi e-İmza onay adımları ile 10 dakika içinde sorunsuz tamamlıyoruz.",
+      "features": [
+        "Hızlı e-İmza Tedariği",
+        "GİB Portal Kayıt İşlemleri",
+        "Android POS e-Fatura Aktivasyonu",
+        "Mali Müşavir Destek Hattı"
+      ],
+      "benefits": [
+        "Mali Cezalara Karşı Koruma",
+        "Kağıt Fatura Masrafından Tasarruf",
+        "10 Dakikada e-İmza Onayı"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop"
+      ],
+      "order": 4
+    }
+  ],
+  "solutions": [
+    {
+      "id": "sol-1",
+      "title": "Restoran, Kafe & Adisyon Otomasyon Çözümleri",
+      "slug": "restoran-kafe-otomasyonu",
+      "category": "Restoran & Hizmet",
+      "shortDesc": "Garson el terminali, mutfak fiş yazıcısı ve e-Fatura POS entegrasyonu ile kusursuz restoran yönetimi.",
+      "fullDesc": "Mobil Android POS ve dokunmatik adisyon sistemlerimiz ile masadan sipariş alın, mutfağa anında iletin ve hesabı kapıda temassız ödeme ile kapatın.",
+      "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop",
+      "features": [
+        "Garson El Terminali Entegrasyonu",
+        "Mutfak Termal Fiş Yazıcı",
+        "Masada Temassız Ödeme",
+        "Stok ve Reçete Takibi"
+      ],
+      "targetAudience": "Restoranlar, Kafeler, Lokantalar ve Pastaneler"
+    },
+    {
+      "id": "sol-2",
+      "title": "Market, Şarküteri & Barkodlu Satış Sistemleri",
+      "slug": "market-sarkuteri-otomasyonu",
+      "category": "Perakende & Market",
+      "shortDesc": "Barkodlu terazi, masaüstü barkod okuyucu ve masaüstü yazarkasa POS ile ışık hızında kasa işlemleri.",
+      "fullDesc": "Market ve şarküteriler için özel paketimiz olan Cas etiketli terazi, barkod okuyucu ve hızlı yazarkasa POS ile müşteri kuyruklarına son verin.",
+      "image": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=800&auto=format&fit=crop",
+      "features": [
+        "Cas Barkodlu Terazi Uyumlu",
+        "Saniyede 100+ Ürün Barkodu Okuma",
+        "Para Çekmecesi Entegre",
+        "Gün Sonu Otomatik Raporlama"
+      ],
+      "targetAudience": "Süpermarketler, Şarküteriler, Manavlar ve Mağazalar"
+    },
+    {
+      "id": "sol-3",
+      "title": "Saha Satış, Dağıtım & Kapıda Ödeme Sistemleri",
+      "slug": "saha-satis-kapida-odeme",
+      "category": "Mobil & Saha",
+      "shortDesc": "Mobil 4G Android POS cihazları ile kapıda ödeme alma ve araçta fatura kesme imkânı.",
+      "fullDesc": "Su, tüp, kargo ve saha dağıtım ekipleriniz için uzun pilli 4G Android POS cihazları ile anında tahsilat yapın ve konum bazlı rapor alın.",
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
+      "features": [
+        "Dahili 4G Sim Kart Modem",
+        "Tüm Gün Süren 6000 mAh Pil",
+        "GPS Saha Konum Takibi",
+        "Anında Dijital Fiş Gönderimi"
+      ],
+      "targetAudience": "Kurye Ekipleri, Tüp ve Su Dağıtıcıları, Saha Satış Ekipleri"
+    }
+  ],
+  "references": [
+    {
+      "id": "r1",
+      "name": "HUGIN Ödeme Teknolojileri",
+      "logo": "https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg",
+      "category": "Yetkili Bayi",
+      "description": "Yetkili Satış ve Servis Merkezi",
+      "city": "İstanbul",
+      "district": "Bayrampaşa",
+      "order": 1
+    },
+    {
+      "id": "r2",
+      "name": "INGENICO Turkey",
+      "logo": "",
+      "category": "Yetkili Bayi",
+      "description": "Move 5000F Yetkili Çözüm Ortağı",
+      "city": "İstanbul",
+      "district": "Şişli",
+      "order": 2
+    },
+    {
+      "id": "r3",
+      "name": "PAYGO Teknoloji",
+      "logo": "",
+      "category": "Yetkili Bayi",
+      "description": "SP630 & N910 Yetkili Satış",
+      "city": "İstanbul",
+      "district": "Ataşehir",
+      "order": 3
+    },
+    {
+      "id": "r4",
+      "name": "INPOS Ödeme Sistemleri",
+      "logo": "",
+      "category": "Yetkili Bayi",
+      "description": "M530 Mobil POS Yetkili Servis",
+      "city": "İstanbul",
+      "district": "Kayıtlı",
+      "order": 4
+    },
+    {
+      "id": "r5",
+      "name": "PAX Technology",
+      "logo": "",
+      "category": "Yetkili Bayi",
+      "description": "A910SF Android POS Dağıtıcı",
+      "city": "İstanbul",
+      "district": "Maltepe",
+      "order": 5
+    },
+    {
+      "id": "r6",
+      "name": "ÖDEAL Ödeme Kuruluşu",
+      "logo": "",
+      "category": "Finans Ortak",
+      "description": "Yetkili Başvuru ve Satış Noktası",
+      "city": "İstanbul",
+      "district": "Merkez",
+      "order": 6
+    },
+    {
+      "id": "r7",
+      "name": "CAS Terazi Türkiye",
+      "logo": "",
+      "category": "Donanım",
+      "description": "Barkodlu Terazi Yetkili Bayi",
+      "city": "İstanbul",
+      "district": "Bayrampaşa",
+      "order": 7
+    },
+    {
+      "id": "r8",
+      "name": "BEKO Mali Hafıza",
+      "logo": "",
+      "category": "Mali Hafıza",
+      "description": "Yazarkasa POS Teknik Servis",
+      "city": "İstanbul",
+      "district": "Beyoğlu",
+      "order": 8
+    }
+  ],
+  "whyUs": [
+    {
+      "id": "w1",
+      "num": "01",
+      "title": "GİB & BDDK Onaylı Güvence",
+      "desc": "Tüm cihazlarımız Gelir İdaresi Başkanlığı resmi onaylı ve mali hafızalıdır.",
+      "order": 1
+    },
+    {
+      "id": "w2",
+      "num": "02",
+      "title": "24 Saatte Adreste Kurulum",
+      "desc": "Siparişiniz yetkili teknik ekibimiz tarafından adresinize getirilerek kurulur.",
+      "order": 2
+    },
+    {
+      "id": "w3",
+      "num": "03",
+      "title": "Kesintisiz İkame Desteği",
+      "desc": "Arıza durumunda 2 saat içinde geçici ikame POS verilerek satışınız kesilmez.",
+      "order": 3
+    },
+    {
+      "id": "w4",
+      "num": "04",
+      "title": "Şeffaf & Düşük Komisyon",
+      "desc": "Ödeal altyapısı ile aylık sabit ücret ve ciro taahhüdü olmadan ödeme alın.",
+      "order": 4
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "authorName": "Mehmet Yılmaz",
+      "authorTitle": "Gurme Restoran İşletmecisi",
+      "company": "Yılmaz Restoran",
+      "city": "İstanbul",
+      "comment": "Hugin S1 Android POS cihazımızı sipariş ettik, ertesi gün yetkili servis gelip kurulumunu ve banka yüklemelerini yaptı. Mutfak yazıcısı ile tam uyumlu çalışıyor, çok memnunuz.",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      "date": "2026-08-15",
+      "isApproved": true
+    },
+    {
+      "id": "t2",
+      "authorName": "Ayşe Karaca",
+      "authorTitle": "Süpermarket Sahibi",
+      "company": "Karaca Market",
+      "city": "Bursa",
+      "comment": "Cas CL3000 barkodlu terazi ile Paygo POS cihazını birlikte aldık. Fiyatlandırma çok şeffaf ve teknik servis desteği gerçekten 7/24 telefonun ucunda.",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
+      "date": "2026-08-18",
+      "isApproved": true
+    }
+  ],
+  "faqs": [
+    {
+      "id": "f1",
+      "question": "Bilgi Fişi dönemi bitti mi? Yeni nesil e-Fatura POS almak zorunda mıyım?",
+      "answer": "Evet, Hazine ve Maliye Bakanlığı ile GİB düzenlemeleri uyarınca eski tip mali hafızasız bilgi fişi cihazlarının kullanımı sonlandırılmıştır. Tüm işletmelerin e-Fatura / e-Arşiv entegrasyonlu yeni nesil ÖKC mali yazarkasa POS kullanması zorunludur.",
+      "category": "POS",
+      "order": 1
+    },
+    {
+      "id": "f2",
+      "question": "Sipariş verdikten sonra kurulum süreci nasıl işliyor?",
+      "answer": "Siparişinizi verdikten sonra yetkili teknik personelimiz vergi levhanız üzerinden resmi ruhsatlandırma ve banka tanımlamalarını yapar. 24 saat içinde cihaz adresinize getirilerek kullanım eğitimi ile teslim edilir.",
+      "category": "Kurulum",
+      "order": 2
+    },
+    {
+      "id": "f3",
+      "question": "Cihaz bozulursa veya arızalanırsa ne yapmalıyım?",
+      "answer": "0530 417 15 65 yetkili servis hattımızı aradığınızda, teknik ekibimiz en kısa sürede adresinize müdahale eder. Tamir süresince satışlarınızın aksamaması için geçici ikame yazarkasa POS cihazı tahsis edilir.",
+      "category": "Teknik Destek",
+      "order": 3
+    }
+  ],
+  "aboutPage": {
+    "title": "Hakkımızda",
+    "subtitle": "Yazarkasa Satışı & Ödeme Teknolojileri",
+    "heroBadge": "SEKTÖR ÖNCÜSÜ",
+    "heroDescription": "Türkiye’nin Öncü Yazarkasa POS & Ödeme Teknolojileri Merkezi. Hugin, Ingenico, Paygo, Inpos, Pax, Beko ve Cas Terazi yetkili satış ve servis noktası olarak 15.000+ işletmeye hizmet veriyoruz.",
+    "storyTitle": "Sektördeki 15 Yıllık Deneyim ve Güven Yolculuğumuz",
+    "storyContent": "Bayrampaşa merkezli firmamız, perakende otomasyonu ve mali ödeme sistemleri alanında kurulduğu günden bu yana dürüst ticaret, hızlı servis ve şeffaf fiyatlandırma ilkesiyle büyümüştür. Bugün 81 ilde aktif servis ağı ve binlerce mutlu müşteri referansıyla sektörün lider sağlayıcılarından biriyiz.",
+    "visionTitle": "Vizyonumuz",
+    "visionContent": "Türkiye’deki tüm işletmelerin finansal teknolojiye ve mali mevzuatlara (GİB & BDDK) %100 uyumlu, en hızlı ve ekonomik ödeme altyapılarına kesintisiz erişimini sağlamak.",
+    "missionTitle": "Misyonumuz",
+    "missionContent": "Satış öncesi doğru cihaz yönlendirmesi, 24 saatte adreste yetkili kurulum ve 7/24 ikame garantili teknik servis desteği ile işletmelerin iş yükünü hafifletmek.",
+    "values": [
+      {
+        "title": "%100 Orijinal & Garantili Donanım",
+        "desc": "Satışını yaptığımız tüm yazarkasa POS ve aksesuarlar 2 yıl yetkili distribütör garantilidir."
+      },
+      {
+        "title": "Şeffaf Fiyat & Gizli Ücret Yok",
+        "desc": "Fiyatlarımız nettir; sürpriz aidat veya gizli abonelik kalemleri barındırmaz."
+      },
+      {
+        "title": "7/24 Kesintisiz Teknik Destek",
+        "desc": "Cihazınız arızalandığında teknik ekibimiz 2 saatte müdahale ederek satışlarınızı korur."
+      }
+    ],
+    "certifications": [
+      {
+        "title": "BDDK Lisanslı Ödeme Hizmetleri Uyumlu",
+        "issuer": "Bankacılık Düzenleme ve Denetleme Kurumu",
+        "badge": "BDDK"
+      },
+      {
+        "title": "GİB Yeni Nesil ÖKC Mali Hafıza Sertifikalı",
+        "issuer": "Gelir İdaresi Başkanlığı",
+        "badge": "GİB"
+      },
+      {
+        "title": "PCI-PTS 6.x / Telium TETRA Güvenlik Standardı",
+        "issuer": "PCI Security Standards Council",
+        "badge": "PCI-DSS"
+      }
+    ]
+  },
+  "projects": [],
+  "catalogs": [],
+  "team": [],
+  "bankAccounts": [
+    {
+      "id": "b1",
+      "bankName": "Ziraat Bankası",
+      "accountHolder": "Yazarkasa Satışı - DR Barkod Ltd. Şti.",
+      "iban": "TR12 0001 0000 0000 0000 0000 01",
+      "branch": "Bayrampaşa Şubesi",
+      "currency": "TL",
+      "logo": ""
+    },
+    {
+      "id": "b2",
+      "bankName": "Garanti BBVA",
+      "accountHolder": "Yazarkasa Satışı - DR Barkod Ltd. Şti.",
+      "iban": "TR34 0006 2000 0000 0000 0000 02",
+      "branch": "Abdi İpekçi Şubesi",
+      "currency": "TL",
+      "logo": ""
+    }
+  ],
+  "dealers": [],
+  "blogPosts": [],
+  "gallery": [],
+  "customPages": [],
+  "submissions": [
+    {
+      "id": "sub-1787320442481",
+      "createdAt": "21.08.2026 16:54:02",
+      "status": "Tamamlandı",
+      "fullName": "deneme",
+      "email": "deneme@gmail.com",
+      "phone": "05555555555",
+      "company": "deneme",
+      "city": "İstanbul",
+      "selectedProduct": "Hugin Tiger T300 4G Yazarkasa POS",
+      "selectedService": "",
+      "message": "dadasd",
+      "kvkkAccepted": true
+    }
+  ],
+  "subscribers": []
+}

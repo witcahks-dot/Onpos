@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary-color: #2563eb;
+    --primary-rgb: 37, 99, 235;
+    --accent-color: #1e3a8a;
+    --accent-rgb: 30, 58, 138;
+    
+    /* Layout Density Tokens */
+    --section-py-sm: 4rem;
+    --section-py-lg: 6.5rem;
+    --card-padding: 1.75rem;
+
+    /* Card Style Tokens */
+    --card-border: 1px solid rgba(226, 232, 240, 0.9);
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    --card-radius: 1.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* DYNAMIC THEME UTILITY CLASSES */
+.bg-theme-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.text-theme-primary {
+  color: var(--primary-color) !important;
+}
+
+.border-theme-primary {
+  border-color: var(--primary-color) !important;
+}
+
+.bg-theme-primary-light {
+  background-color: rgba(var(--primary-rgb), 0.08) !important;
+}
+
+.text-theme-primary-light {
+  color: rgba(var(--primary-rgb), 0.9) !important;
+}
+
+.border-theme-primary-light {
+  border-color: rgba(var(--primary-rgb), 0.25) !important;
+}
+
+.bg-theme-accent {
+  background-color: var(--accent-color) !important;
+}
+
+.text-theme-accent {
+  color: var(--accent-color) !important;
+}
+
+.shadow-theme-primary {
+  box-shadow: 0 10px 25px -5px rgba(var(--primary-rgb), 0.35) !important;
+}
+
+.text-gradient-theme {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 60%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* DYNAMIC CARD STYLES */
+.theme-card {
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  background-color: #ffffff;
+}
+
+/* DYNAMIC DENSITY STYLES */
+.theme-section-py {
+  padding-top: var(--section-py-sm);
+  padding-bottom: var(--section-py-sm);
+}
+
+@media (min-width: 640px) {
+  .theme-section-py {
+    padding-top: var(--section-py-lg);
+    padding-bottom: var(--section-py-lg);
+  }
+}
+
+/* Custom Grid Background */
+.bg-corporate-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+}
+
+.box-shadow-soft {
+  box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.12), 0 4px 12px -4px rgba(15, 23, 42, 0.04);
+}
+
+.box-shadow-elevated {
+  box-shadow: 0 20px 40px -15px rgba(var(--primary-rgb), 0.2), 0 8px 20px -6px rgba(15, 23, 42, 0.08);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
