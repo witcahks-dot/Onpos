@@ -26,7 +26,9 @@ import {
   CustomPage,
   QuoteSubmission,
   AboutPageData,
-  AdminUser
+  AdminUser,
+  HeaderConfig,
+  FooterConfig
 } from '@/types';
 import { defaultCMSData } from './default-data';
 
@@ -34,9 +36,14 @@ interface CMSStoreState extends CMSData {
   isLoading: boolean;
   error: string | null;
   adminUsers: AdminUser[];
+  headerConfig: HeaderConfig;
+  footerConfig: FooterConfig;
   
   saveAdminUser: (user: Partial<AdminUser>) => Promise<void>;
   deleteAdminUser: (id: string) => Promise<void>;
+  
+  updateHeaderConfig: (config: Partial<HeaderConfig>) => Promise<void>;
+  updateFooterConfig: (config: Partial<FooterConfig>) => Promise<void>;
   
   // Actions
   fetchCMSData: () => Promise<void>;
@@ -106,6 +113,29 @@ interface CMSStoreState extends CMSData {
 export const useCMSStore = create<CMSStoreState>((set, get) => ({
   ...defaultCMSData,
   adminUsers: defaultCMSData.adminUsers || [],
+  headerConfig: defaultCMSData.headerConfig || {
+    showTopbar: true,
+    topbarText: '',
+    topbarPhone: '',
+    topbarWhatsapp: '',
+    showSearch: true,
+    showQuoteButton: true,
+    quoteButtonText: 'Hemen Teklif Al',
+    quoteButtonUrl: '#teklif-al',
+    stickyHeader: true,
+    headerStyle: 'standard',
+  },
+  footerConfig: defaultCMSData.footerConfig || {
+    footerStyle: 'full',
+    brandDescription: '',
+    copyrightText: '',
+    showSocialLinks: true,
+    showWorkingHours: true,
+    showPaymentBadges: true,
+    quickLinksTitle: 'Hızlı Erişim',
+    productsTitle: 'POS Çözümleri',
+    contactTitle: 'İletişim & Destek',
+  },
   isLoading: false,
   error: null,
 
@@ -118,6 +148,8 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       set({ 
         ...data, 
         adminUsers: data.adminUsers || defaultCMSData.adminUsers || [],
+        headerConfig: data.headerConfig || defaultCMSData.headerConfig || get().headerConfig,
+        footerConfig: data.footerConfig || defaultCMSData.footerConfig || get().footerConfig,
         isLoading: false 
       });
     } catch (err: unknown) {
@@ -700,6 +732,36 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       await get().fetchCMSData();
     } catch (err) {
       console.error('Failed to delete admin user:', err);
+    }
+  },
+
+  updateHeaderConfig: async (config) => {
+    try {
+      const updated = { ...get().headerConfig, ...config };
+      set({ headerConfig: updated });
+      await fetch('/api/cms/headerConfig', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
+      await get().fetchCMSData();
+    } catch (err) {
+      console.error('Failed to update headerConfig:', err);
+    }
+  },
+
+  updateFooterConfig: async (config) => {
+    try {
+      const updated = { ...get().footerConfig, ...config };
+      set({ footerConfig: updated });
+      await fetch('/api/cms/footerConfig', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
+      await get().fetchCMSData();
+    } catch (err) {
+      console.error('Failed to update footerConfig:', err);
     }
   },
 }));

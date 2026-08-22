@@ -38,7 +38,8 @@ import {
   Globe,
   Radio,
   SlidersHorizontal,
-  Bell
+  Bell,
+  Layout
 } from 'lucide-react';
 
 interface NavSubItem {
@@ -86,6 +87,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       isCollapsible: true,
       items: [
         { label: 'Genel Ayarlar & Logo', href: '/admin/settings', icon: Settings },
+        { label: 'Header & Footer Yönetimi', href: '/admin/header-footer', icon: Layout },
         { label: 'Kullanıcı Yönetimi', href: '/admin/users', icon: Users },
         { label: 'Ana Sayfa Modül Sıralama', href: '/admin/sections', icon: SlidersHorizontal },
         { label: 'Üst Menü Düzeni', href: '/admin/menu', icon: MenuIcon },

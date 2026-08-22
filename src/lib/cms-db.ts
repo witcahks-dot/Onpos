@@ -45,6 +45,8 @@ export function readCMSData(): CMSData {
         aboutPage: { ...defaultCMSData.aboutPage, ...(parsed.aboutPage || {}) },
         homeSections: parsed.homeSections || defaultCMSData.homeSections,
         adminUsers: parsed.adminUsers || defaultCMSData.adminUsers,
+        headerConfig: { ...defaultCMSData.headerConfig, ...(parsed.headerConfig || {}) },
+        footerConfig: { ...defaultCMSData.footerConfig, ...(parsed.footerConfig || {}) },
       };
       inMemoryCache = data;
       

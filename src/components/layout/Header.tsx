@@ -19,7 +19,7 @@ export default function Header() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const { settings, menu, fetchCMSData } = useCMSStore();
+  const { settings, menu, headerConfig, fetchCMSData } = useCMSStore();
 
   useEffect(() => {
     fetchCMSData();
@@ -42,8 +42,10 @@ export default function Header() {
     setIsQuoteModalOpen(true);
   };
 
+  const isSticky = headerConfig?.stickyHeader !== false;
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-white shadow-xs">
+    <header className={`${isSticky ? 'sticky top-0' : 'relative'} z-40 w-full bg-white shadow-xs`}>
       {/* Topbar */}
       <Topbar />
 
@@ -135,26 +137,30 @@ export default function Header() {
           <div className="flex items-center gap-2 shrink-0">
             
             {/* Live Search Trigger Button */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2 rounded-xl text-slate-600 hover:text-theme-primary hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer border border-transparent hover:border-slate-200"
-              title="Arama Yap (Cmd+K)"
-            >
-              <Search className="w-4 h-4 text-slate-500" />
-              <span className="hidden xl:inline text-slate-400 text-xs">Ara...</span>
-              <span className="hidden xl:inline bg-slate-100 border border-slate-200 text-slate-500 text-[10px] px-1.5 py-0.5 rounded font-mono font-bold">
-                ⌘K
-              </span>
-            </button>
+            {headerConfig?.showSearch !== false && (
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2 rounded-xl text-slate-600 hover:text-theme-primary hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer border border-transparent hover:border-slate-200"
+                title="Arama Yap (Cmd+K)"
+              >
+                <Search className="w-4 h-4 text-slate-500" />
+                <span className="hidden xl:inline text-slate-400 text-xs">Ara...</span>
+                <span className="hidden xl:inline bg-slate-100 border border-slate-200 text-slate-500 text-[10px] px-1.5 py-0.5 rounded font-mono font-bold">
+                  ⌘K
+                </span>
+              </button>
+            )}
 
             {/* Teklif Al Primary CTA Button */}
-            <button
-              onClick={handleOpenQuote}
-              className="hidden sm:inline-flex items-center justify-center gap-2 bg-theme-primary hover:opacity-90 text-white text-xs font-extrabold px-4 xl:px-5 py-2.5 rounded-xl transition-all shadow-md shadow-theme-primary active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
-            >
-              <Shield className="w-4 h-4 shrink-0" />
-              <span>Teklif Al</span>
-            </button>
+            {headerConfig?.showQuoteButton !== false && (
+              <button
+                onClick={handleOpenQuote}
+                className="hidden sm:inline-flex items-center justify-center gap-2 bg-theme-primary hover:opacity-90 text-white text-xs font-extrabold px-4 xl:px-5 py-2.5 rounded-xl transition-all shadow-md shadow-theme-primary active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
+              >
+                <Shield className="w-4 h-4 shrink-0" />
+                <span>{headerConfig?.quoteButtonText || 'Teklif Al'}</span>
+              </button>
+            )}
 
             {/* Mobile Menu Hamburger Toggle */}
             <button

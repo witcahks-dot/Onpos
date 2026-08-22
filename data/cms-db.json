@@ -1204,5 +1204,48 @@
       "kvkkAccepted": true
     }
   ],
-  "subscribers": []
+  "subscribers": [],
+  "adminUsers": [
+    {
+      "id": "usr-1",
+      "name": "PAYPOS Sistem Yöneticisi",
+      "email": "admin@paypos.com.tr",
+      "password": "admin123",
+      "role": "Super Admin",
+      "status": "Aktif",
+      "createdAt": "2026-08-01 10:00"
+    },
+    {
+      "id": "usr-2",
+      "name": "Saha Satış Yetkilisi",
+      "email": "satis@paypos.com.tr",
+      "password": "paypos2026",
+      "role": "Yönetici",
+      "status": "Aktif",
+      "createdAt": "2026-08-10 14:30"
+    }
+  ],
+  "headerConfig": {
+    "showTopbar": true,
+    "topbarText": "✓ BİLGİ FİŞİ DÖNEMİ SONA ERİYOR • e-FATURA VE e-ARŞİV FATURA DÖNEMİ BAŞLIYOR!",
+    "topbarPhone": "+90 530 417 15 65",
+    "topbarWhatsapp": "905304171565",
+    "showSearch": true,
+    "showQuoteButton": true,
+    "quoteButtonText": "Hemen Teklif Al",
+    "quoteButtonUrl": "#teklif-al",
+    "stickyHeader": true,
+    "headerStyle": "standard"
+  },
+  "footerConfig": {
+    "footerStyle": "full",
+    "brandDescription": "Hugin, Ingenico, Paygo, Inpos, Pax ve Beko yetkili satış & teknik servis noktası. 81 ilde 24 saatte adrese teslimat ve ikame cihaz garantisi.",
+    "copyrightText": "© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.",
+    "showSocialLinks": true,
+    "showWorkingHours": true,
+    "showPaymentBadges": true,
+    "quickLinksTitle": "Hızlı Erişim",
+    "productsTitle": "POS Çözümleri",
+    "contactTitle": "İletişim & Destek"
+  }
 }

@@ -6,42 +6,56 @@ import { Phone, Mail, MapPin, ShieldCheck, ArrowRight, Lock, Award, HeartHandsha
 import { useCMSStore } from '@/lib/cms-store';
 
 export default function Footer() {
-  const { settings, products, services } = useCMSStore();
+  const { settings, products, services, footerConfig } = useCMSStore();
+
+  const cfg = footerConfig || {
+    footerStyle: 'full',
+    brandDescription: 'Hugin, Ingenico, Paygo, Inpos, Pax ve Beko yetkili satış & teknik servis noktası. 81 ilde 24 saatte adrese teslimat ve ikame cihaz garantisi.',
+    copyrightText: '© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.',
+    showSocialLinks: true,
+    showWorkingHours: true,
+    showPaymentBadges: true,
+    quickLinksTitle: 'Hızlı Erişim',
+    productsTitle: 'POS Çözümleri',
+    contactTitle: 'İletişim & Destek',
+  };
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Feature Badges */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-slate-800 text-xs">
-          <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-            <ShieldCheck className="w-8 h-8 text-blue-400 shrink-0" />
-            <div>
-              <h4 className="font-bold text-white text-sm">PCI-PTS 6.x Güvenlik</h4>
-              <p className="text-slate-400 mt-0.5">Uluslararası BDDK & EMV L1/L2 onaylı ödeme standartları.</p>
+        {cfg.showPaymentBadges !== false && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-slate-800 text-xs">
+            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+              <ShieldCheck className="w-8 h-8 text-blue-400 shrink-0" />
+              <div>
+                <h4 className="font-bold text-white text-sm">PCI-PTS 6.x Güvenlik</h4>
+                <p className="text-slate-400 mt-0.5">Uluslararası BDDK & EMV L1/L2 onaylı ödeme standartları.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+              <Lock className="w-8 h-8 text-blue-400 shrink-0" />
+              <div>
+                <h4 className="font-bold text-white text-sm">P2PE Şifreleme</h4>
+                <p className="text-slate-400 mt-0.5">End-to-End uçtan uca şifrelenmiş güvenli kart saklama altyapısı.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+              <Award className="w-8 h-8 text-blue-400 shrink-0" />
+              <div>
+                <h4 className="font-bold text-white text-sm">GİB & ÖKC Onaylı</h4>
+                <p className="text-slate-400 mt-0.5">Gelir İdaresi Başkanlığı yeni nesil mevzuat uyumlu mali hafıza.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+              <HeartHandshake className="w-8 h-8 text-blue-400 shrink-0" />
+              <div>
+                <h4 className="font-bold text-white text-sm">7/24 Saha Desteği</h4>
+                <p className="text-slate-400 mt-0.5">2 saat içinde adresinizde birebir ikame cihaz garantisi.</p>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-            <Lock className="w-8 h-8 text-blue-400 shrink-0" />
-            <div>
-              <h4 className="font-bold text-white text-sm">P2PE Şifreleme</h4>
-              <p className="text-slate-400 mt-0.5">End-to-End uçtan uca şifrelenmiş güvenli kart saklama altyapısı.</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-            <Award className="w-8 h-8 text-blue-400 shrink-0" />
-            <div>
-              <h4 className="font-bold text-white text-sm">GİB & ÖKC Onaylı</h4>
-              <p className="text-slate-400 mt-0.5">Gelir İdaresi Başkanlığı yeni nesil mevzuat uyumlu mali hafıza.</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-            <HeartHandshake className="w-8 h-8 text-blue-400 shrink-0" />
-            <div>
-              <h4 className="font-bold text-white text-sm">7/24 Saha Desteği</h4>
-              <p className="text-slate-400 mt-0.5">2 saat içinde adresinizde birebir ikame cihaz garantisi.</p>
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* Main Footer Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 py-12">
@@ -67,7 +81,7 @@ export default function Footer() {
               )}
             </Link>
             <p className="text-xs text-slate-400 leading-relaxed">
-              PAYPOS Ödeme Teknolojileri A.Ş., fiziki mağazalardan mobil sahalara kadar tüm ölçekteki işletmeler için yeni nesil akıllı POS ve ödeme altyapıları sunan lider teknoloji firmasıdır.
+              {cfg.brandDescription || 'PAYPOS Ödeme Teknolojileri A.Ş., fiziki mağazalardan mobil sahalara kadar tüm ölçekteki işletmeler için yeni nesil akıllı POS ve ödeme altyapıları sunan lider teknoloji firmasıdır.'}
             </p>
             <div className="space-y-2 text-xs text-slate-400 pt-2">
               <div className="flex items-start gap-2.5">
@@ -194,7 +208,7 @@ export default function Footer() {
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © 2026 PAYPOS Ödeme Teknolojileri A.Ş. Tüm hakları saklıdır.
+            {cfg.copyrightText || '© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.'}
           </div>
           <div className="flex items-center gap-4 flex-wrap">
             <Link href="/kurumsal/kvkk" className="hover:text-slate-300 transition-colors">

@@ -392,6 +392,31 @@ export interface AdminUser {
   lastLogin?: string;
 }
 
+export interface HeaderConfig {
+  showTopbar: boolean;
+  topbarText: string;
+  topbarPhone: string;
+  topbarWhatsapp: string;
+  showSearch: boolean;
+  showQuoteButton: boolean;
+  quoteButtonText: string;
+  quoteButtonUrl: string;
+  stickyHeader: boolean;
+  headerStyle: 'standard' | 'minimal' | 'floating';
+}
+
+export interface FooterConfig {
+  footerStyle: 'full' | 'compact' | 'minimal';
+  brandDescription: string;
+  copyrightText: string;
+  showSocialLinks: boolean;
+  showWorkingHours: boolean;
+  showPaymentBadges: boolean;
+  quickLinksTitle: string;
+  productsTitle: string;
+  contactTitle: string;
+}
+
 export interface CMSData {
   settings: SiteSettings;
   menu: MenuItem[];
@@ -420,4 +445,6 @@ export interface CMSData {
   subscribers: SubscriberItem[];
   homeSections?: HomeSectionConfig[];
   adminUsers?: AdminUser[];
+  headerConfig?: HeaderConfig;
+  footerConfig?: FooterConfig;
 }
