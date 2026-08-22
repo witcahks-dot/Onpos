@@ -52,15 +52,15 @@ export default function SpatialPosSlider() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Visual Typography & Quick Spec Pills */}
-          <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-5 text-center lg:text-left min-h-[380px] sm:min-h-[340px] flex flex-col justify-center relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.35 }}
-                className="space-y-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                className="space-y-5"
               >
                 {/* Glowing Eyebrow Badge */}
                 <div className="inline-flex items-center gap-2 bg-theme-primary-light text-theme-primary border border-theme-primary-light px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-xs">
@@ -77,7 +77,7 @@ export default function SpatialPosSlider() {
                 </h1>
 
                 {/* Concise Description */}
-                <p className="text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <p className="text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 min-h-[48px]">
                   {currentSlide.description}
                 </p>
 
@@ -116,12 +116,12 @@ export default function SpatialPosSlider() {
           </div>
 
           {/* Right Column: 3D Spatial Device Showcase with Floating Glass Badges */}
-          <div className="lg:col-span-7 relative h-[420px] sm:h-[500px] flex items-center justify-center">
+          <div className="lg:col-span-7 relative h-[420px] sm:h-[480px] flex items-center justify-center overflow-hidden">
             
             {/* FLOATING GLASSMAPPING BADGES */}
             {/* Top-Left Floating Badge */}
             <motion.div
-              animate={{ y: [0, -8, 0] }}
+              animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute top-2 left-2 sm:left-6 z-30 bg-white/90 backdrop-blur-xl border border-white/80 p-3.5 rounded-2xl shadow-xl shadow-slate-900/10 flex items-center gap-3 hidden sm:flex"
             >
@@ -136,7 +136,7 @@ export default function SpatialPosSlider() {
 
             {/* Bottom-Right Floating Badge */}
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               className="absolute bottom-4 right-2 sm:right-6 z-30 bg-white/90 backdrop-blur-xl border border-white/80 p-3.5 rounded-2xl shadow-xl shadow-slate-900/10 flex items-center gap-3 hidden sm:flex"
             >
@@ -154,35 +154,32 @@ export default function SpatialPosSlider() {
               
               {/* Left Background POS */}
               {activeSlides.length > 1 && (
-                <motion.div
+                <div
                   key={`left-${leftSlide.id}`}
                   onClick={prevSlide}
-                  className="absolute left-0 sm:-left-4 cursor-pointer z-10 hidden sm:block opacity-40 hover:opacity-80 transition-opacity"
-                  initial={{ opacity: 0.3, scale: 0.8 }}
-                  animate={{ opacity: 0.45, scale: 0.85, x: -70 }}
-                  transition={{ duration: 0.4 }}
+                  className="absolute left-0 sm:left-2 cursor-pointer z-10 hidden sm:block opacity-40 hover:opacity-80 transition-opacity -translate-x-12 scale-85"
                 >
-                  <div className="w-48 h-64 bg-slate-50 p-4 rounded-3xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-lg">
+                  <div className="w-44 h-60 bg-slate-50 p-4 rounded-3xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-lg">
                     <img
                       src={leftSlide.imageUrl}
                       alt={leftSlide.posName}
-                      className="w-36 h-44 object-contain"
+                      className="w-32 h-40 object-contain"
                     />
                     <span className="text-xs font-bold text-slate-700 mt-2 truncate w-full px-2">
                       {leftSlide.posName}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               )}
 
               {/* CENTER STAGE HERO DEVICE CARD */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`center-${currentSlide.id}`}
-                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                  animate={{ opacity: 1, scale: 1.08, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                  transition={{ duration: 0.4 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                   className="relative z-20"
                 >
                   <div className="w-72 sm:w-80 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-2xl flex flex-col items-center justify-between text-center relative overflow-hidden group">
@@ -215,25 +212,22 @@ export default function SpatialPosSlider() {
 
               {/* Right Background POS */}
               {activeSlides.length > 1 && (
-                <motion.div
+                <div
                   key={`right-${rightSlide.id}`}
                   onClick={nextSlide}
-                  className="absolute right-0 sm:-right-4 cursor-pointer z-10 hidden sm:block opacity-40 hover:opacity-80 transition-opacity"
-                  initial={{ opacity: 0.3, scale: 0.8 }}
-                  animate={{ opacity: 0.45, scale: 0.85, x: 70 }}
-                  transition={{ duration: 0.4 }}
+                  className="absolute right-0 sm:right-2 cursor-pointer z-10 hidden sm:block opacity-40 hover:opacity-80 transition-opacity translate-x-12 scale-85"
                 >
-                  <div className="w-48 h-64 bg-slate-50 p-4 rounded-3xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-lg">
+                  <div className="w-44 h-60 bg-slate-50 p-4 rounded-3xl border border-slate-200 flex flex-col items-center justify-center text-center shadow-lg">
                     <img
                       src={rightSlide.imageUrl}
                       alt={rightSlide.posName}
-                      className="w-36 h-44 object-contain"
+                      className="w-36 h-40 object-contain"
                     />
                     <span className="text-xs font-bold text-slate-700 mt-2 truncate w-full px-2">
                       {rightSlide.posName}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               )}
             </div>
 
