@@ -67,6 +67,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const { user, logout } = useAuthStore();
   const { submissions, subscribers, testimonials, fetchCMSData } = useCMSStore();
 
+  const [openCatIds, setOpenCatIds] = useState<Record<string, boolean>>({
+    'site-mgmt': true,
+    'content-mgmt': true,
+    'notifications': true,
+  });
+
   useEffect(() => {
     fetchCMSData();
   }, [fetchCMSData]);
@@ -148,13 +154,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     },
   ];
 
-  // Active Category Single-Expand State matching exact light sidebar screenshots
   const activeCatId = categories.find(cat => cat.items.some(item => item.href === pathname))?.id || 'content-mgmt';
-  const [openCatIds, setOpenCatIds] = useState<Record<string, boolean>>({
-    'site-mgmt': true,
-    'content-mgmt': true,
-    'notifications': true,
-  });
 
   const toggleCategory = (catId: string) => {
     setOpenCatIds(prev => ({ ...prev, [catId]: !prev[catId] }));
