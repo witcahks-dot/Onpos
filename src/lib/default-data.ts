@@ -4,7 +4,7 @@ export const defaultCMSData: CMSData = {
   settings: {
     siteName: 'Yazarkasa Satışı & Ödeme Teknolojileri',
     tagline: 'Hugin, Ingenico, Paygo, Inpos Yetkili Satış & Servis',
-    logoUrl: '/images/logo.svg',
+    logoUrl: 'https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg',
     faviconUrl: '/favicon.ico',
     primaryColor: '#2563eb',
     accentColor: '#1e3a8a',
