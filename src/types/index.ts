@@ -453,11 +453,6 @@ export interface FooterConfig {
   contactTitle?: string;
 }
 
-export interface HeroConfig {
-  sliderTheme: 'theme1' | 'theme2';
-  autoplaySpeed?: number;
-}
-
 export interface CMSData {
   settings: SiteSettings;
   menu: MenuItem[];
@@ -488,5 +483,4 @@ export interface CMSData {
   adminUsers?: AdminUser[];
   headerConfig?: HeaderConfig;
   footerConfig?: FooterConfig;
-  heroConfig?: HeroConfig;
 }

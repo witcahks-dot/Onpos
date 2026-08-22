@@ -28,8 +28,7 @@ import {
   AboutPageData,
   AdminUser,
   HeaderConfig,
-  FooterConfig,
-  HeroConfig
+  FooterConfig
 } from '@/types';
 import { defaultCMSData } from './default-data';
 
@@ -39,14 +38,12 @@ interface CMSStoreState extends CMSData {
   adminUsers: AdminUser[];
   headerConfig: HeaderConfig;
   footerConfig: FooterConfig;
-  heroConfig?: HeroConfig;
   
   saveAdminUser: (user: Partial<AdminUser>) => Promise<void>;
   deleteAdminUser: (id: string) => Promise<void>;
   
   updateHeaderConfig: (config: Partial<HeaderConfig>) => Promise<void>;
   updateFooterConfig: (config: Partial<FooterConfig>) => Promise<void>;
-  updateHeroConfig: (config: Partial<HeroConfig>) => Promise<void>;
   
   // Actions
   fetchCMSData: () => Promise<void>;
@@ -235,20 +232,6 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       if (res.ok) set({ heroSlides: get().heroSlides.filter(s => s.id !== id) });
     } catch (err) {
       console.error('Failed to delete hero slide:', err);
-    }
-  },
-
-  updateHeroConfig: async (config) => {
-    try {
-      const merged: HeroConfig = { sliderTheme: 'theme1', ...get().heroConfig, ...config };
-      set({ heroConfig: merged });
-      await fetch('/api/cms/heroConfig', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(config),
-      });
-    } catch (err) {
-      console.error('Failed to update hero config:', err);
     }
   },
 

@@ -5,10 +5,8 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Shield, ArrowRight, Sparkles, CheckCircle2, Zap, Lock, Wifi } from 'lucide-react';
 import { useCMSStore } from '@/lib/cms-store';
 
-import VisualHeroBannerSlider from './VisualHeroBannerSlider';
-
 export default function SpatialPosSlider() {
-  const { heroSlides, heroConfig } = useCMSStore();
+  const heroSlides = useCMSStore((state) => state.heroSlides);
   const activeSlides = (heroSlides || []).filter(s => s.isActive).sort((a, b) => a.order - b.order);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,10 +27,6 @@ export default function SpatialPosSlider() {
     const interval = setInterval(nextSlide, 5500);
     return () => clearInterval(interval);
   }, [nextSlide, isPaused, activeSlides.length]);
-
-  if (heroConfig?.sliderTheme === 'theme2') {
-    return <VisualHeroBannerSlider />;
-  }
 
   if (activeSlides.length === 0) return null;
 
