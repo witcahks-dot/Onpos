@@ -44,6 +44,7 @@ export function readCMSData(): CMSData {
         cloudPanel: { ...defaultCMSData.cloudPanel, ...(parsed.cloudPanel || {}) },
         aboutPage: { ...defaultCMSData.aboutPage, ...(parsed.aboutPage || {}) },
         homeSections: parsed.homeSections || defaultCMSData.homeSections,
+        adminUsers: parsed.adminUsers || defaultCMSData.adminUsers,
       };
       inMemoryCache = data;
       

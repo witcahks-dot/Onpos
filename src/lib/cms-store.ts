@@ -25,13 +25,18 @@ import {
   ECatalog,
   CustomPage,
   QuoteSubmission,
-  AboutPageData
+  AboutPageData,
+  AdminUser
 } from '@/types';
 import { defaultCMSData } from './default-data';
 
 interface CMSStoreState extends CMSData {
   isLoading: boolean;
   error: string | null;
+  adminUsers: AdminUser[];
+  
+  saveAdminUser: (user: Partial<AdminUser>) => Promise<void>;
+  deleteAdminUser: (id: string) => Promise<void>;
   
   // Actions
   fetchCMSData: () => Promise<void>;
@@ -100,6 +105,7 @@ interface CMSStoreState extends CMSData {
 
 export const useCMSStore = create<CMSStoreState>((set, get) => ({
   ...defaultCMSData,
+  adminUsers: defaultCMSData.adminUsers || [],
   isLoading: false,
   error: null,
 
@@ -109,7 +115,11 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       const res = await fetch('/api/cms/all', { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to fetch CMS data');
       const data: CMSData = await res.json();
-      set({ ...data, isLoading: false });
+      set({ 
+        ...data, 
+        adminUsers: data.adminUsers || defaultCMSData.adminUsers || [],
+        isLoading: false 
+      });
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Unknown error';
       set({ error: message, isLoading: false });
@@ -642,6 +652,54 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
     } catch (err) {
       console.error('Newsletter subscribe error:', err);
       return false;
+    }
+  },
+
+  saveAdminUser: async (user) => {
+    try {
+      const isEdit = !!user.id;
+      const currentList = get().adminUsers || [];
+      
+      if (isEdit) {
+        const updated = currentList.map(u => u.id === user.id ? { ...u, ...user } : u);
+        set({ adminUsers: updated });
+        await fetch('/api/cms/adminUsers', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
+        });
+      } else {
+        const newUser: AdminUser = {
+          id: 'usr-' + Date.now(),
+          name: user.name || 'Yeni Kullanıcı',
+          email: user.email || 'user@paypos.com.tr',
+          password: user.password || 'paypos2026',
+          role: user.role || 'Yönetici',
+          status: user.status || 'Aktif',
+          createdAt: new Date().toLocaleString('tr-TR'),
+          ...user,
+        };
+        set({ adminUsers: [newUser, ...currentList] });
+        await fetch('/api/cms/adminUsers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser),
+        });
+      }
+      await get().fetchCMSData();
+    } catch (err) {
+      console.error('Failed to save admin user:', err);
+    }
+  },
+
+  deleteAdminUser: async (id) => {
+    try {
+      const updated = (get().adminUsers || []).filter(u => u.id !== id);
+      set({ adminUsers: updated });
+      await fetch(`/api/cms/adminUsers?id=${id}`, { method: 'DELETE' });
+      await get().fetchCMSData();
+    } catch (err) {
+      console.error('Failed to delete admin user:', err);
     }
   },
 }));

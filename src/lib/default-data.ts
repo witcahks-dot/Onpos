@@ -608,4 +608,24 @@ export const defaultCMSData: CMSData = {
   customPages: [],
   submissions: [],
   subscribers: [],
+  adminUsers: [
+    {
+      id: 'usr-1',
+      name: 'PAYPOS Sistem Yöneticisi',
+      email: 'admin@paypos.com.tr',
+      password: 'admin123',
+      role: 'Super Admin',
+      status: 'Aktif',
+      createdAt: '2026-08-01 10:00',
+    },
+    {
+      id: 'usr-2',
+      name: 'Saha Satış Yetkilisi',
+      email: 'satis@paypos.com.tr',
+      password: 'paypos2026',
+      role: 'Yönetici',
+      status: 'Aktif',
+      createdAt: '2026-08-10 14:30',
+    },
+  ],
 };

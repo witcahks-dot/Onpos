@@ -381,6 +381,17 @@ export interface AboutPageData {
   certifications: Array<{ title: string; issuer: string; badge: string }>;
 }
 
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  password?: string;
+  role: 'Super Admin' | 'Yönetici' | 'Editör';
+  status: 'Aktif' | 'Pasif';
+  createdAt: string;
+  lastLogin?: string;
+}
+
 export interface CMSData {
   settings: SiteSettings;
   menu: MenuItem[];
@@ -408,4 +419,5 @@ export interface CMSData {
   submissions: QuoteSubmission[];
   subscribers: SubscriberItem[];
   homeSections?: HomeSectionConfig[];
+  adminUsers?: AdminUser[];
 }

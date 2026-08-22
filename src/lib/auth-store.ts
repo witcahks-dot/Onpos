@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useCMSStore } from './cms-store';
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -19,27 +20,53 @@ export const useAuthStore = create<AuthState>()(
       user: null,
 
       login: (email: string, pass: string) => {
-        // Default Admin login credentials or custom check
-        // User can log in with admin@paypos.com.tr / admin123 or any credentials
-        if ((email === 'admin@paypos.com.tr' || email === 'admin') && (pass === 'admin123' || pass === 'paypos2026')) {
+        const cleanEmail = email.trim().toLowerCase();
+        const cleanPass = pass.trim();
+
+        // 1. Dynamic Check from CMS Store Admin Users
+        const cmsUsers = useCMSStore.getState().adminUsers || [];
+        const foundUser = cmsUsers.find(
+          (u) =>
+            (u.email.toLowerCase() === cleanEmail || u.name.toLowerCase() === cleanEmail) &&
+            u.status === 'Aktif' &&
+            (!u.password || u.password === cleanPass)
+        );
+
+        if (foundUser) {
+          set({
+            isAuthenticated: true,
+            user: {
+              name: foundUser.name,
+              email: foundUser.email,
+              role: foundUser.role,
+            },
+          });
+          return true;
+        }
+
+        // 2. Default Fallback Admin Credentials
+        if (
+          (cleanEmail === 'admin@paypos.com.tr' || cleanEmail === 'admin') &&
+          (cleanPass === 'admin123' || cleanPass === 'paypos2026')
+        ) {
           set({
             isAuthenticated: true,
             user: {
               name: 'PAYPOS Sistem Yöneticisi',
-              email: email.includes('@') ? email : 'admin@paypos.com.tr',
+              email: 'admin@paypos.com.tr',
               role: 'Super Admin',
             },
           });
           return true;
         }
 
-        // Allow instant login for demo/testing with any non-empty input
-        if (email.trim().length > 0 && pass.trim().length > 0) {
+        // 3. Fallback for demo input
+        if (cleanEmail.length > 0 && cleanPass.length > 0) {
           set({
             isAuthenticated: true,
             user: {
-              name: email.split('@')[0].toUpperCase(),
-              email,
+              name: cleanEmail.split('@')[0].toUpperCase(),
+              email: cleanEmail.includes('@') ? cleanEmail : `${cleanEmail}@paypos.com.tr`,
               role: 'Yönetici',
             },
           });
