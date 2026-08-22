@@ -10,50 +10,78 @@ export default function Footer() {
 
   const cfg = footerConfig || {
     footerStyle: 'full',
+    footerLogoUrl: 'https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg',
     brandDescription: 'Hugin, Ingenico, Paygo, Inpos, Pax ve Beko yetkili satış & teknik servis noktası. 81 ilde 24 saatte adrese teslimat ve ikame cihaz garantisi.',
-    copyrightText: '© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.',
+    showContactInfoUnderLogo: true,
+    showFeatureCards: true,
+    featureCards: [
+      { id: 'f1', title: 'PCI-PTS 6.x Güvenlik', subtitle: 'Uluslararası BDDK & EMV L1/L2 onaylı ödeme standartları.', iconName: 'ShieldCheck' },
+      { id: 'f2', title: 'P2PE Şifreleme', subtitle: 'End-to-End uçtan uca şifrelenmiş güvenli kart saklama altyapısı.', iconName: 'Lock' },
+      { id: 'f3', title: 'GİB & ÖKC Onaylı', subtitle: 'Gelir İdaresi Başkanlığı yeni nesil mevzuat uyumlu mali hafıza.', iconName: 'Award' },
+      { id: 'f4', title: '7/24 Saha Desteği', subtitle: '2 saat içinde adresinizde birebir ikame cihaz garantisi.', iconName: 'HeartHandshake' },
+    ],
+    col1Title: 'POS ÜRÜNLERİ',
+    col1Links: [
+      { id: 'l1', label: 'Hugin Tiger T300 4G Yazarkasa POS', href: '/pos-cihazlari/hugin-tiger-t300', isVisible: true },
+      { id: 'l2', label: 'Inpos M530 Mobil Yazarkasa POS', href: '/pos-cihazlari/inpos-m530', isVisible: true },
+      { id: 'l3', label: 'Paygo SP630 ECR 4G Pro Yazarkasa POS', href: '/pos-cihazlari/paygo-sp630', isVisible: true },
+      { id: 'l4', label: 'Ingenico Move 5000F Mobil Yazarkasa POS', href: '/pos-cihazlari/ingenico-move-5000f', isVisible: true },
+      { id: 'l5', label: 'Hugin S1 Android Yazarkasa POS', href: '/pos-cihazlari/hugin-s1', isVisible: true },
+    ],
+    col2Title: 'HİZMETLER & ÇÖZÜMLER',
+    col2Links: [
+      { id: 's1', label: 'Yazarkasa POS Yetkili Satış & Adreste Kurulum', href: '/hizmetler/satis-ve-kurulum', isVisible: true },
+      { id: 's2', label: 'Ödeal & Düşük Komisyonlu Ödeme Altyapısı', href: '/cozumler/odeko-komisyon', isVisible: true },
+      { id: 's3', label: '7/24 Kesintisiz Yerinde Teknik Servis & İkame', href: '/hizmetler/7-24-teknik-servis', isVisible: true },
+      { id: 's4', label: 'e-Fatura & e-Arşiv Entegrasyon Danışmanlığı', href: '/hizmetler/e-fatura-danismanligi', isVisible: true },
+      { id: 's5', label: 'Sektörel Ödeme Çözümleri', href: '/cozumler', isVisible: true },
+    ],
+    col3Title: 'KURUMSAL & DESTEK',
+    col3Links: [
+      { id: 'k1', label: 'Hakkımızda', href: '/kurumsal/hakkimizda', isVisible: true },
+      { id: 'k2', label: 'Tarihçe & Kronoloji', href: '/kurumsal/tarihcemiz', isVisible: true },
+      { id: 'k3', label: 'Sertifika ve Belgeler', href: '/kurumsal/belgelerimiz', isVisible: true },
+      { id: 'k4', label: 'Referanslarımız', href: '/kurumsal/referanslar', isVisible: true },
+      { id: 'k5', label: 'Yönetim Ekibi', href: '/kurumsal/ekibimiz', isVisible: true },
+      { id: 'k6', label: 'Kariyer Pozisyonları', href: '/kurumsal/kariyer', isVisible: true },
+      { id: 'k7', label: 'Banka Hesapları & IBAN', href: '/kurumsal/banka-hesaplari', isVisible: true },
+      { id: 'k8', label: 'E-Katalog PDF Center', href: '/kurumsal/e-katalog', isVisible: true },
+      { id: 'k9', label: 'Sıkça Sorulan Sorular (SSS)', href: '/sss', isVisible: true },
+    ],
+    showNewsletter: true,
+    newsletterTitle: 'Mali & Mevzuat Güncellemeleri',
+    newsletterSubtitle: 'Yeni GİB tebliğleri ve komisyon avantajlarından ilk siz haberdar olun.',
+    newsletterPlaceholder: 'E-posta adresiniz',
+    newsletterButtonText: 'Abone Ol',
+    copyrightText: '© 2026 PAYPOS Ödeme Teknolojileri A.Ş. Tüm Hakları Saklıdır.',
+    legalLinks: [
+      { id: 'leg1', label: 'KVKK Aydınlatma Metni', href: '/kurumsal/kvkk', isVisible: true },
+      { id: 'leg2', label: 'Gizlilik Politikası', href: '/kurumsal/gizlilik', isVisible: true },
+      { id: 'leg3', label: 'Çerez Politikası', href: '/kurumsal/cerezler', isVisible: true },
+    ],
     showSocialLinks: true,
     showWorkingHours: true,
     showPaymentBadges: true,
-    quickLinksTitle: 'Hızlı Erişim',
-    productsTitle: 'POS Çözümleri',
-    contactTitle: 'İletişim & Destek',
   };
 
+  const logoToRender = cfg.footerLogoUrl || settings.logoUrl;
+
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
+    <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800 selection:bg-blue-600 selection:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Feature Badges */}
-        {cfg.showPaymentBadges !== false && (
+        
+        {/* Top Feature Badges Bar */}
+        {cfg.showFeatureCards !== false && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-12 border-b border-slate-800 text-xs">
-            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-              <ShieldCheck className="w-8 h-8 text-blue-400 shrink-0" />
-              <div>
-                <h4 className="font-bold text-white text-sm">PCI-PTS 6.x Güvenlik</h4>
-                <p className="text-slate-400 mt-0.5">Uluslararası BDDK & EMV L1/L2 onaylı ödeme standartları.</p>
+            {(cfg.featureCards || []).map(card => (
+              <div key={card.id} className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+                <ShieldCheck className="w-8 h-8 text-blue-400 shrink-0" />
+                <div>
+                  <h4 className="font-bold text-white text-sm">{card.title}</h4>
+                  <p className="text-slate-400 mt-0.5">{card.subtitle}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-              <Lock className="w-8 h-8 text-blue-400 shrink-0" />
-              <div>
-                <h4 className="font-bold text-white text-sm">P2PE Şifreleme</h4>
-                <p className="text-slate-400 mt-0.5">End-to-End uçtan uca şifrelenmiş güvenli kart saklama altyapısı.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-              <Award className="w-8 h-8 text-blue-400 shrink-0" />
-              <div>
-                <h4 className="font-bold text-white text-sm">GİB & ÖKC Onaylı</h4>
-                <p className="text-slate-400 mt-0.5">Gelir İdaresi Başkanlığı yeni nesil mevzuat uyumlu mali hafıza.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-              <HeartHandshake className="w-8 h-8 text-blue-400 shrink-0" />
-              <div>
-                <h4 className="font-bold text-white text-sm">7/24 Saha Desteği</h4>
-                <p className="text-slate-400 mt-0.5">2 saat içinde adresinizde birebir ikame cihaz garantisi.</p>
-              </div>
-            </div>
+            ))}
           </div>
         )}
 
@@ -62,9 +90,9 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4 pr-4">
             <Link href="/" className="flex items-center gap-2.5">
-              {settings.logoUrl && settings.logoUrl.trim() !== '' ? (
+              {logoToRender && logoToRender.trim() !== '' ? (
                 <img
-                  src={settings.logoUrl}
+                  src={logoToRender}
                   alt={settings.siteName || 'Logo'}
                   style={{ height: `${(settings.logoHeight || 36) + 4}px` }}
                   className="object-contain max-w-[220px] bg-white/95 p-1.5 rounded-lg border border-slate-700 shadow-md"
@@ -81,41 +109,49 @@ export default function Footer() {
               )}
             </Link>
             <p className="text-xs text-slate-400 leading-relaxed">
-              {cfg.brandDescription || 'PAYPOS Ödeme Teknolojileri A.Ş., fiziki mağazalardan mobil sahalara kadar tüm ölçekteki işletmeler için yeni nesil akıllı POS ve ödeme altyapıları sunan lider teknoloji firmasıdır.'}
+              {cfg.brandDescription || 'Hugin, Ingenico, Paygo, Inpos, Pax ve Beko yetkili satış & teknik servis noktası.'}
             </p>
-            <div className="space-y-2 text-xs text-slate-400 pt-2">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{settings.address}</span>
+
+            {cfg.showContactInfoUnderLogo !== false && (
+              <div className="space-y-2 text-xs text-slate-400 pt-2">
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                  <span>{settings.address}</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Phone className="w-4 h-4 text-blue-400 shrink-0" />
+                  <span>{settings.phoneFormatted}</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Mail className="w-4 h-4 text-blue-400 shrink-0" />
+                  <span>{settings.email}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>{settings.phoneFormatted}</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>{settings.email}</span>
-              </div>
-            </div>
+            )}
 
             {/* E-Bülten Aboneliği Formu */}
-            <div className="pt-3">
-              <span className="text-[11px] font-bold text-white block mb-1.5">E-Bülten & Mevzuat Güncellemeleri</span>
-              <FooterNewsletterForm />
-            </div>
+            {cfg.showNewsletter !== false && (
+              <div className="pt-3">
+                <span className="text-[11px] font-bold text-white block mb-1.5">{cfg.newsletterTitle || 'E-Bülten & Mevzuat Güncellemeleri'}</span>
+                <FooterNewsletterForm placeholder={cfg.newsletterPlaceholder} buttonText={cfg.newsletterButtonText} />
+              </div>
+            )}
           </div>
 
-          {/* Col 2: POS Devices */}
+          {/* Col 2: POS Devices / Custom Links */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              POS Ürünleri
+              {cfg.col1Title || 'POS ÜRÜNLERİ'}
             </h4>
             <ul className="space-y-2 text-xs">
-              {(products || []).slice(0, 5).map(prod => (
-                <li key={prod.id}>
-                  <Link href={`/pos-cihazlari/${prod.slug}`} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+              {(cfg.col1Links && cfg.col1Links.length > 0
+                ? cfg.col1Links.filter(l => l.isVisible)
+                : (products || []).slice(0, 5).map(p => ({ id: p.id, label: p.name, href: `/pos-cihazlari/${p.slug}`, isVisible: true }))
+              ).map(link => (
+                <li key={link.id}>
+                  <Link href={link.href} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                     <ArrowRight className="w-3 h-3 text-slate-600" />
-                    <span>{prod.name}</span>
+                    <span>{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -130,77 +166,49 @@ export default function Footer() {
           {/* Col 3: Solutions & Services */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Hizmetler & Çözümler
+              {cfg.col2Title || 'HİZMETLER & ÇÖZÜMLER'}
             </h4>
             <ul className="space-y-2 text-xs">
-              {(services || []).map(serv => (
-                <li key={serv.id}>
-                  <Link href={`/hizmetler/${serv.slug}`} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+              {(cfg.col2Links && cfg.col2Links.length > 0
+                ? cfg.col2Links.filter(l => l.isVisible)
+                : (services || []).map(s => ({ id: s.id, label: s.name, href: `/hizmetler/${s.slug}`, isVisible: true }))
+              ).map(link => (
+                <li key={link.id}>
+                  <Link href={link.href} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                     <ArrowRight className="w-3 h-3 text-slate-600" />
-                    <span>{serv.name}</span>
+                    <span>{link.label}</span>
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/cozumler" className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-600" />
-                  <span>Sektörel Ödeme Çözümleri</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Col 4: Corporate & Support */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              Kurumsal & Destek
+              {cfg.col3Title || 'KURUMSAL & DESTEK'}
             </h4>
             <ul className="space-y-2 text-xs">
-              <li>
-                <Link href="/kurumsal/hakkimizda" className="hover:text-blue-400 transition-colors">
-                  Hakkımızda
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/tarihcemiz" className="hover:text-blue-400 transition-colors">
-                  Tarihçe & Kronoloji
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/belgelerimiz" className="hover:text-blue-400 transition-colors">
-                  Sertifika ve Belgeler
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/referanslar" className="hover:text-blue-400 transition-colors">
-                  Referanslarımız
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/ekibimiz" className="hover:text-blue-400 transition-colors">
-                  Yönetim Ekibi
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/kariyer" className="hover:text-blue-400 transition-colors">
-                  Kariyer Pozisyonları
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/banka-hesaplari" className="hover:text-blue-400 transition-colors">
-                  Banka Hesapları & IBAN
-                </Link>
-              </li>
-              <li>
-                <Link href="/kurumsal/e-katalog" className="hover:text-blue-400 transition-colors">
-                  E-Katalog PDF Center
-                </Link>
-              </li>
-              <li>
-                <Link href="/sss" className="hover:text-blue-400 transition-colors">
-                  Sıkça Sorulan Sorular (SSS)
-                </Link>
-              </li>
+              {(cfg.col3Links && cfg.col3Links.length > 0
+                ? cfg.col3Links.filter(l => l.isVisible)
+                : [
+                    { id: 'k1', label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
+                    { id: 'k2', label: 'Tarihçe & Kronoloji', href: '/kurumsal/tarihcemiz' },
+                    { id: 'k3', label: 'Sertifika ve Belgeler', href: '/kurumsal/belgelerimiz' },
+                    { id: 'k4', label: 'Referanslarımız', href: '/kurumsal/referanslar' },
+                    { id: 'k5', label: 'Yönetim Ekibi', href: '/kurumsal/ekibimiz' },
+                    { id: 'k6', label: 'Kariyer Pozisyonları', href: '/kurumsal/kariyer' },
+                    { id: 'k7', label: 'Banka Hesapları & IBAN', href: '/kurumsal/banka-hesaplari' },
+                    { id: 'k8', label: 'E-Katalog PDF Center', href: '/kurumsal/e-katalog' },
+                    { id: 'k9', label: 'Sıkça Sorulan Sorular (SSS)', href: '/sss' },
+                  ]
+              ).map(link => (
+                <li key={link.id}>
+                  <Link href={link.href} className="hover:text-blue-400 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -208,20 +216,24 @@ export default function Footer() {
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            {cfg.copyrightText || '© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.'}
+            {cfg.copyrightText || '© 2026 PAYPOS Ödeme Teknolojileri A.Ş. Tüm Hakları Saklıdır.'}
           </div>
           <div className="flex items-center gap-4 flex-wrap">
-            <Link href="/kurumsal/kvkk" className="hover:text-slate-300 transition-colors">
-              KVKK Aydınlatma Metni
-            </Link>
-            <span>•</span>
-            <Link href="/kurumsal/gizlilik" className="hover:text-slate-300 transition-colors">
-              Gizlilik Politikası
-            </Link>
-            <span>•</span>
-            <Link href="/kurumsal/cerezler" className="hover:text-slate-300 transition-colors">
-              Çerez Politikası
-            </Link>
+            {(cfg.legalLinks && cfg.legalLinks.length > 0
+              ? cfg.legalLinks.filter(l => l.isVisible)
+              : [
+                  { id: 'l1', label: 'KVKK Aydınlatma Metni', href: '/kurumsal/kvkk' },
+                  { id: 'l2', label: 'Gizlilik Politikası', href: '/kurumsal/gizlilik' },
+                  { id: 'l3', label: 'Çerez Politikası', href: '/kurumsal/cerezler' },
+                ]
+            ).map((link, idx) => (
+              <React.Fragment key={link.id}>
+                {idx > 0 && <span>•</span>}
+                <Link href={link.href} className="hover:text-slate-300 transition-colors">
+                  {link.label}
+                </Link>
+              </React.Fragment>
+            ))}
             <span>•</span>
             <Link href="/admin" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
               Yönetici Paneli (CMS Login)
@@ -233,7 +245,7 @@ export default function Footer() {
   );
 }
 
-function FooterNewsletterForm() {
+function FooterNewsletterForm({ placeholder, buttonText }: { placeholder?: string; buttonText?: string }) {
   const subscribeNewsletter = useCMSStore((state) => state.subscribeNewsletter);
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -259,16 +271,16 @@ function FooterNewsletterForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-posta adresiniz"
+          placeholder={placeholder || 'E-posta adresiniz'}
           className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500 outline-none"
           required
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-colors shrink-0 disabled:opacity-50"
+          className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-colors shrink-0 disabled:opacity-50 cursor-pointer"
         >
-          {status === 'submitting' ? '...' : 'Abone Ol'}
+          {status === 'submitting' ? '...' : (buttonText || 'Abone Ol')}
         </button>
       </div>
       {status === 'success' && (
@@ -280,4 +292,3 @@ function FooterNewsletterForm() {
     </form>
   );
 }
-

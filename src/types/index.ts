@@ -405,16 +405,52 @@ export interface HeaderConfig {
   headerStyle: 'standard' | 'minimal' | 'floating';
 }
 
+export interface FooterLinkItem {
+  id: string;
+  label: string;
+  href: string;
+  isVisible: boolean;
+}
+
+export interface FooterBadgeCard {
+  id: string;
+  title: string;
+  subtitle: string;
+  iconName?: string;
+}
+
 export interface FooterConfig {
   footerStyle: 'full' | 'compact' | 'minimal';
+  footerLogoUrl?: string;
   brandDescription: string;
+  showContactInfoUnderLogo?: boolean;
+  
+  showFeatureCards?: boolean;
+  featureCards?: FooterBadgeCard[];
+  
+  col1Title?: string;
+  col1Links?: FooterLinkItem[];
+  
+  col2Title?: string;
+  col2Links?: FooterLinkItem[];
+  
+  col3Title?: string;
+  col3Links?: FooterLinkItem[];
+  
+  showNewsletter?: boolean;
+  newsletterTitle?: string;
+  newsletterSubtitle?: string;
+  newsletterPlaceholder?: string;
+  newsletterButtonText?: string;
+  
   copyrightText: string;
+  legalLinks?: FooterLinkItem[];
   showSocialLinks: boolean;
   showWorkingHours: boolean;
   showPaymentBadges: boolean;
-  quickLinksTitle: string;
-  productsTitle: string;
-  contactTitle: string;
+  quickLinksTitle?: string;
+  productsTitle?: string;
+  contactTitle?: string;
 }
 
 export interface CMSData {

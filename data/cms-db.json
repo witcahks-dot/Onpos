@@ -1239,8 +1239,185 @@
   },
   "footerConfig": {
     "footerStyle": "full",
+    "footerLogoUrl": "https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg",
     "brandDescription": "Hugin, Ingenico, Paygo, Inpos, Pax ve Beko yetkili satış & teknik servis noktası. 81 ilde 24 saatte adrese teslimat ve ikame cihaz garantisi.",
+    "showContactInfoUnderLogo": true,
+    "showFeatureCards": true,
+    "featureCards": [
+      {
+        "id": "f1",
+        "title": "PCI-PTS 6.x Güvenlik",
+        "subtitle": "Uluslararası BDDK & EMV L1/L2 onaylı ödeme standartları.",
+        "iconName": "ShieldCheck"
+      },
+      {
+        "id": "f2",
+        "title": "P2PE Şifreleme",
+        "subtitle": "End-to-End uçtan uca şifrelenmiş güvenli kart saklama altyapısı.",
+        "iconName": "Lock"
+      },
+      {
+        "id": "f3",
+        "title": "GİB & ÖKC Onaylı",
+        "subtitle": "Gelir İdaresi Başkanlığı yeni nesil mevzuat uyumlu mali hafıza.",
+        "iconName": "Award"
+      },
+      {
+        "id": "f4",
+        "title": "7/24 Saha Desteği",
+        "subtitle": "2 saat içinde adresinizde birebir ikame cihaz garantisi.",
+        "iconName": "HeartHandshake"
+      }
+    ],
+    "col1Title": "POS ÜRÜNLERİ",
+    "col1Links": [
+      {
+        "id": "l1",
+        "label": "Hugin Tiger T300 4G Yazarkasa POS",
+        "href": "/pos-cihazlari/hugin-tiger-t300",
+        "isVisible": true
+      },
+      {
+        "id": "l2",
+        "label": "Inpos M530 Mobil Yazarkasa POS",
+        "href": "/pos-cihazlari/inpos-m530",
+        "isVisible": true
+      },
+      {
+        "id": "l3",
+        "label": "Paygo SP630 ECR 4G Pro Yazarkasa POS",
+        "href": "/pos-cihazlari/paygo-sp630",
+        "isVisible": true
+      },
+      {
+        "id": "l4",
+        "label": "Ingenico Move 5000F Mobil Yazarkasa POS",
+        "href": "/pos-cihazlari/ingenico-move-5000f",
+        "isVisible": true
+      },
+      {
+        "id": "l5",
+        "label": "Hugin S1 Android Yazarkasa POS",
+        "href": "/pos-cihazlari/hugin-s1",
+        "isVisible": true
+      }
+    ],
+    "col2Title": "HİZMETLER & ÇÖZÜMLER",
+    "col2Links": [
+      {
+        "id": "s1",
+        "label": "Yazarkasa POS Yetkili Satış & Adreste Kurulum",
+        "href": "/hizmetler/satis-ve-kurulum",
+        "isVisible": true
+      },
+      {
+        "id": "s2",
+        "label": "Ödeal & Düşük Komisyonlu Ödeme Altyapısı",
+        "href": "/cozumler/odeko-komisyon",
+        "isVisible": true
+      },
+      {
+        "id": "s3",
+        "label": "7/24 Kesintisiz Yerinde Teknik Servis & İkame",
+        "href": "/hizmetler/7-24-teknik-servis",
+        "isVisible": true
+      },
+      {
+        "id": "s4",
+        "label": "e-Fatura & e-Arşiv Entegrasyon Danışmanlığı",
+        "href": "/hizmetler/e-fatura-danismanligi",
+        "isVisible": true
+      },
+      {
+        "id": "s5",
+        "label": "Sektörel Ödeme Çözümleri",
+        "href": "/cozumler",
+        "isVisible": true
+      }
+    ],
+    "col3Title": "KURUMSAL & DESTEK",
+    "col3Links": [
+      {
+        "id": "k1",
+        "label": "Hakkımızda",
+        "href": "/kurumsal/hakkimizda",
+        "isVisible": true
+      },
+      {
+        "id": "k2",
+        "label": "Tarihçe & Kronoloji",
+        "href": "/kurumsal/tarihcemiz",
+        "isVisible": true
+      },
+      {
+        "id": "k3",
+        "label": "Sertifika ve Belgeler",
+        "href": "/kurumsal/belgelerimiz",
+        "isVisible": true
+      },
+      {
+        "id": "k4",
+        "label": "Referanslarımız",
+        "href": "/kurumsal/referanslar",
+        "isVisible": true
+      },
+      {
+        "id": "k5",
+        "label": "Yönetim Ekibi",
+        "href": "/kurumsal/ekibimiz",
+        "isVisible": true
+      },
+      {
+        "id": "k6",
+        "label": "Kariyer Pozisyonları",
+        "href": "/kurumsal/kariyer",
+        "isVisible": true
+      },
+      {
+        "id": "k7",
+        "label": "Banka Hesapları & IBAN",
+        "href": "/kurumsal/banka-hesaplari",
+        "isVisible": true
+      },
+      {
+        "id": "k8",
+        "label": "E-Katalog PDF Center",
+        "href": "/kurumsal/e-katalog",
+        "isVisible": true
+      },
+      {
+        "id": "k9",
+        "label": "Sıkça Sorulan Sorular (SSS)",
+        "href": "/sss",
+        "isVisible": true
+      }
+    ],
+    "showNewsletter": true,
+    "newsletterTitle": "Mali & Mevzuat Güncellemeleri",
+    "newsletterSubtitle": "Yeni GİB tebliğleri ve komisyon avantajlarından ilk siz haberdar olun.",
+    "newsletterPlaceholder": "E-posta adresiniz",
+    "newsletterButtonText": "Abone Ol",
     "copyrightText": "© 2026 PAYPOS Ödeme Teknolojileri. Tüm Hakları Saklıdır.",
+    "legalLinks": [
+      {
+        "id": "leg1",
+        "label": "KVKK Aydınlatma Metni",
+        "href": "/kurumsal/kvkk",
+        "isVisible": true
+      },
+      {
+        "id": "leg2",
+        "label": "Gizlilik Politikası",
+        "href": "/kurumsal/gizlilik",
+        "isVisible": true
+      },
+      {
+        "id": "leg3",
+        "label": "Çerez Politikası",
+        "href": "/kurumsal/cerezler",
+        "isVisible": true
+      }
+    ],
     "showSocialLinks": true,
     "showWorkingHours": true,
     "showPaymentBadges": true,
