@@ -29,7 +29,8 @@ export const useAuthStore = create<AuthState>()(
           (u) =>
             (u.email.toLowerCase() === cleanEmail || u.name.toLowerCase() === cleanEmail) &&
             u.status === 'Aktif' &&
-            (!u.password || u.password === cleanPass)
+            u.password &&
+            u.password === cleanPass
         );
 
         if (foundUser) {
@@ -44,10 +45,10 @@ export const useAuthStore = create<AuthState>()(
           return true;
         }
 
-        // 2. Default Fallback Admin Credentials
+        // 2. Default Admin Credentials
         if (
           (cleanEmail === 'admin@paypos.com.tr' || cleanEmail === 'admin') &&
-          (cleanPass === 'admin123' || cleanPass === 'paypos2026')
+          (cleanPass === 'paypos2026' || cleanPass === 'admin123')
         ) {
           set({
             isAuthenticated: true,
@@ -55,19 +56,6 @@ export const useAuthStore = create<AuthState>()(
               name: 'PAYPOS Sistem Yöneticisi',
               email: 'admin@paypos.com.tr',
               role: 'Super Admin',
-            },
-          });
-          return true;
-        }
-
-        // 3. Fallback for demo input
-        if (cleanEmail.length > 0 && cleanPass.length > 0) {
-          set({
-            isAuthenticated: true,
-            user: {
-              name: cleanEmail.split('@')[0].toUpperCase(),
-              email: cleanEmail.includes('@') ? cleanEmail : `${cleanEmail}@paypos.com.tr`,
-              role: 'Yönetici',
             },
           });
           return true;
