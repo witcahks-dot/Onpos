@@ -47,6 +47,7 @@ export function readCMSData(): CMSData {
         adminUsers: parsed.adminUsers || defaultCMSData.adminUsers,
         headerConfig: { ...defaultCMSData.headerConfig, ...(parsed.headerConfig || {}) },
         footerConfig: { ...defaultCMSData.footerConfig, ...(parsed.footerConfig || {}) },
+        heroConfig: { ...defaultCMSData.heroConfig, ...(parsed.heroConfig || {}) },
       };
       inMemoryCache = data;
       

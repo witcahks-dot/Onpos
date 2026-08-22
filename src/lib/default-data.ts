@@ -695,4 +695,8 @@ export const defaultCMSData: CMSData = {
     showWorkingHours: true,
     showPaymentBadges: true,
   },
+  heroConfig: {
+    sliderTheme: 'theme1',
+    autoplaySpeed: 5500,
+  },
 };
