@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readCMSData, writeCMSData } from '@/lib/cms-db';
 import { CMSData } from '@/types';
+import { quoteSubmissionSchema, newsletterSchema } from '@/lib/validations';
+import { ZodError } from 'zod';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -40,16 +42,36 @@ export async function POST(
     const body = await req.json();
     const currentData = readCMSData();
 
+    // 1. Validated Lead & Quote Form Submission
     if (entity === 'quote-submit') {
+      const validatedData = quoteSubmissionSchema.parse(body);
       const newSubmission = {
         id: 'sub-' + Date.now(),
         createdAt: new Date().toLocaleString('tr-TR'),
         status: 'Yeni' as const,
-        ...body,
+        ...validatedData,
       };
       const updatedSubmissions = [newSubmission, ...(currentData.submissions || [])];
-      const newCMS = writeCMSData({ submissions: updatedSubmissions });
-      return NextResponse.json(newSubmission, { status: 201 });
+      writeCMSData({ submissions: updatedSubmissions });
+      return NextResponse.json({ success: true, message: 'Başvurunuz başarıyla kaydedildi.', data: newSubmission }, { status: 201 });
+    }
+
+    // 2. Validated Newsletter Subscription
+    if (entity === 'subscribers' && body && typeof body === 'object' && 'email' in body) {
+      const validatedNewsletter = newsletterSchema.parse(body);
+      const currentSubs = currentData.subscribers || [];
+      const exists = currentSubs.some(s => s.email.toLowerCase() === validatedNewsletter.email.toLowerCase());
+      if (exists) {
+        return NextResponse.json({ success: true, message: 'Bu e-posta adresi zaten bültenimize kayıtlı.' }, { status: 200 });
+      }
+      const newSubscriber = {
+        id: 'sub-news-' + Date.now(),
+        email: validatedNewsletter.email,
+        createdAt: new Date().toLocaleString('tr-TR'),
+      };
+      const updatedSubs = [newSubscriber, ...currentSubs];
+      writeCMSData({ subscribers: updatedSubs });
+      return NextResponse.json({ success: true, message: 'Bülten kaydınız başarıyla oluşturuldu.', data: newSubscriber }, { status: 201 });
     }
 
     // If body itself is an Array (e.g. full replacement for homeSections, menu, etc.)
@@ -82,9 +104,17 @@ export async function POST(
     // If target entity doesn't exist yet, save it directly
     const newCMS = writeCMSData({ [entity]: body });
     return NextResponse.json(newCMS[entity as keyof CMSData], { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof ZodError) {
+      const fieldErrors = error.flatten().fieldErrors;
+      const firstErrorMessage = Object.values(fieldErrors).flat()[0] || 'Girilen bilgiler doğrulanamadı.';
+      return NextResponse.json(
+        { success: false, message: firstErrorMessage, errors: fieldErrors },
+        { status: 400 }
+      );
+    }
     console.error('API POST error:', error);
-    return NextResponse.json({ error: 'Failed to save item.' }, { status: 500 });
+    return NextResponse.json({ success: false, message: 'İşlem sırasında bir hata oluştu.' }, { status: 500 });
   }
 }
 

@@ -14,8 +14,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PAYPOS Ödeme Teknolojileri | Yeni Nesil POS Cihazları ve Çözümleri",
+  title: {
+    default: "PAYPOS Ödeme Teknolojileri | Yeni Nesil POS Cihazları ve Çözümleri",
+    template: "%s | PAYPOS Ödeme Teknolojileri",
+  },
   description: "Türkiye genelinde 10.000+ işletmenin güvendiği yeni nesil Android POS, Mobil POS, Masaüstü POS ve GİB onaylı Yazarkasa POS ödeme çözümleri.",
+  keywords: [
+    "yazarkasa pos",
+    "android pos",
+    "mobil pos",
+    "ödeme sistemleri",
+    "hugin pos",
+    "ingenico pos",
+    "paygo pos",
+    "pos cihazı fiyatları",
+    "komisyonsuz pos",
+  ],
+  authors: [{ name: "PAYPOS Ödeme Teknolojileri A.Ş." }],
+  creator: "PAYPOS",
+  metadataBase: new URL("https://onpos2.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://onpos2.vercel.app",
+    siteName: "PAYPOS Ödeme Teknolojileri",
+    title: "PAYPOS Ödeme Teknolojileri | Yeni Nesil POS Cihazları ve Çözümleri",
+    description: "GİB onaylı Android ve Mobil POS cihazları, düşük komisyon oranları ve 24 saatte adrese teslim garantisi.",
+    images: [
+      {
+        url: "https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg",
+        width: 1200,
+        height: 630,
+        alt: "PAYPOS Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PAYPOS Ödeme Teknolojileri",
+    description: "Yeni Nesil Akıllı POS ve Ödeme Altyapıları",
+    images: ["https://www.yazarkasasatisi.com/upload/logos/POSLOGO.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
