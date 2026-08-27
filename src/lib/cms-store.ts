@@ -31,6 +31,7 @@ import {
   FooterConfig
 } from '@/types';
 import { defaultCMSData } from './default-data';
+import { normalizeCMSData } from './data-normalizers';
 
 interface CMSStoreState extends CMSData {
   isLoading: boolean;
@@ -144,7 +145,8 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       set({ isLoading: true, error: null });
       const res = await fetch('/api/cms/all', { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to fetch CMS data');
-      const data: CMSData = await res.json();
+      const rawData: CMSData = await res.json();
+      const data = normalizeCMSData(rawData);
       set({ 
         ...data, 
         adminUsers: data.adminUsers || defaultCMSData.adminUsers || [],

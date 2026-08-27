@@ -74,12 +74,15 @@ export default function CMSHydrator() {
         root.style.setProperty('--card-radius', '1.5rem');
       }
 
-      // 4. Dark/Light Theme Mode
+      // 4. Dark/Light Theme Mode & Active Theme ID
       if (settings.activeTheme === 'dark') {
         root.classList.add('dark');
       } else {
         root.classList.remove('dark');
       }
+
+      const activeThemeId = settings.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+      root.setAttribute('data-theme', activeThemeId);
     }
   }, [
     settings?.primaryColor,
@@ -87,7 +90,8 @@ export default function CMSHydrator() {
     settings?.colorPreset,
     settings?.layoutDensity,
     settings?.cardStyle,
-    settings?.activeTheme
+    settings?.activeTheme,
+    settings?.themeId
   ]);
 
   const isAdmin = pathname?.startsWith('/admin');

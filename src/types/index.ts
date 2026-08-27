@@ -1,3 +1,5 @@
+export type ThemeId = 'theme-existing' | 'theme-fintech';
+
 export interface SiteSettings {
   siteName: string;
   tagline: string;
@@ -25,6 +27,7 @@ export interface SiteSettings {
   currency: string;
   language: string;
   activeTheme: 'light' | 'dark';
+  themeId?: ThemeId;
   topbarText: string;
   headerStyle: 'standard' | 'minimal' | 'floating';
   footerStyle: 'full' | 'compact' | 'minimal';

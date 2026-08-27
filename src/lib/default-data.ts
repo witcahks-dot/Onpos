@@ -26,6 +26,7 @@ export const defaultCMSData: CMSData = {
     currency: '₺',
     language: 'TR',
     activeTheme: 'light',
+    themeId: 'theme-existing',
     topbarText: '✓ BİLGİ FİŞİ DÖNEMİ SONA ERİYOR • e-FATURA VE e-ARŞİV FATURA DÖNEMİ BAŞLIYOR!',
     headerStyle: 'standard',
     footerStyle: 'full',

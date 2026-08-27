@@ -15,13 +15,16 @@ import {
   Check,
   MessageCircle,
   Phone,
-  PhoneCall
+  PhoneCall,
+  Monitor
 } from 'lucide-react';
+import { ThemeId } from '@/types';
 
 export default function AdminSettingsPage() {
   const { settings, updateSettings } = useCMSStore();
   const [form, setForm] = useState({
     ...settings,
+    themeId: (settings.themeId || 'theme-existing') as ThemeId,
     logoHeight: settings.logoHeight || 40,
     showLogoText: settings.showLogoText !== false,
     showQuickContactButtons: settings.showQuickContactButtons !== false,
@@ -71,26 +74,114 @@ export default function AdminSettingsPage() {
     { id: 'slate-black', name: 'Minimal Siyah', primary: '#0f172a', accent: '#020617', desc: 'Sade & Monokrom Minimalist' },
   ];
 
+  const themes: { id: ThemeId; name: string; badge: string; desc: string; previewColor: string; tags: string[] }[] = [
+    {
+      id: 'theme-existing',
+      name: 'Mevcut Tema (PAYPOS Beyaz & Mavi)',
+      badge: 'KLASİK KURUMSAL',
+      desc: 'Orijinal beyaz ve kurumsal mavi tabanlı arayüz. Geniş hero alanı, dinamik Türkiye haritası ve klasik kurumsal bölümler.',
+      previewColor: 'from-blue-600 to-indigo-700',
+      tags: ['Beyaz / Mavi', 'Türkiye Haritası', 'Geleneksel Kurumsal']
+    },
+    {
+      id: 'theme-fintech',
+      name: 'Fintech Teması (Modern Koyu & Metrik Odaklı)',
+      badge: 'REFERANS FİNTEK TASARIMI',
+      desc: 'Referans görseldeki üst düzey finans & ödeme teknolojileri teması. 3D cihaz sunumu, komisyon sparkline kartları, bakiye paneli, sürtünmesiz ödeme özellikleri ve modern 2-sütunlu SSS.',
+      previewColor: 'from-slate-950 via-slate-900 to-emerald-950',
+      tags: ['Koyu & Modern', 'Finansal Metrikler', 'Sürtünmesiz POS & Sparkline']
+    }
+  ];
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
         <h1 className="text-2xl font-black text-slate-900 flex items-center gap-2">
           <Palette className="w-6 h-6 text-blue-600" />
-          <span>Logo, İletişim & Sistem Ayarları</span>
+          <span>Tema, Logo & Sistem Ayarları</span>
         </h1>
         <p className="text-xs text-slate-500 mt-1">
-          Sitenizin logosunu, yüzen WhatsApp/Telefon iletişim butonlarını, renk şemasını ve genel bilgilerini tek ekrandan yönetin.
+          Sitenizin aktif temasını, logosunu, yüzen iletişim butonlarını ve genel ayarlarını tek ekrandan yönetin.
         </p>
       </div>
 
       {saved && (
         <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-200 flex items-center gap-2 text-xs font-bold animate-in fade-in">
           <CheckCircle2 className="w-4 h-4" />
-          <span>Ayarlar ve yüzen iletişim butonları başarıyla kaydedildi ve canlı sitede güncellendi!</span>
+          <span>Ayarlar ve tema seçimi başarıyla kaydedildi! Canlı sitede anında aktif edildi.</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6 text-xs">
+
+        {/* 0. ACTIVE THEME SWITCHER */}
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border-2 border-blue-600/30 shadow-lg space-y-6">
+          <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
+            <div>
+              <h3 className="font-black text-slate-900 text-sm flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-blue-600" />
+                <span>0. Aktif Canlı Tema Seçimi (Multi-Theme Engine)</span>
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-0.5">
+                Tek tıkla sitenin tüm public sayfalarında gösterilecek aktif tasarım temasını değiştirin.
+              </p>
+            </div>
+            <span className="text-[10px] font-black uppercase bg-blue-600 text-white px-3 py-1 rounded-full shadow-sm">
+              ÇOKLU TEMA MOTORU
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {themes.map((t) => {
+              const isSelected = (form.themeId || 'theme-existing') === t.id;
+              return (
+                <div
+                  key={t.id}
+                  onClick={() => setForm({ ...form, themeId: t.id })}
+                  className={`p-5 rounded-3xl border-2 text-left transition-all flex flex-col justify-between cursor-pointer relative overflow-hidden ${
+                    isSelected
+                      ? 'border-blue-600 bg-blue-50/40 shadow-xl ring-2 ring-blue-600/20'
+                      : 'border-slate-200 bg-slate-50/60 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-slate-900 text-white">
+                        {t.badge}
+                      </span>
+                      {isSelected ? (
+                        <div className="flex items-center gap-1 text-blue-600 font-extrabold text-xs">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span>Aktif Tema</span>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] text-slate-400 font-semibold">Seçmek için tıkla</span>
+                      )}
+                    </div>
+
+                    <div className={`h-20 rounded-2xl bg-gradient-to-br ${t.previewColor} flex items-center justify-center p-3 text-white shadow-inner`}>
+                      <span className="font-extrabold text-sm tracking-tight">{t.name}</span>
+                    </div>
+
+                    <div>
+                      <h4 className="font-extrabold text-slate-900 text-sm">{t.name}</h4>
+                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">{t.desc}</p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {t.tags.map((tag, idx) => (
+                        <span key={idx} className="text-[10px] font-semibold bg-white border border-slate-200 px-2 py-0.5 rounded-md text-slate-600">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         
         {/* LOGO MANAGEMENT & BRAND IDENTITY SECTION */}
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">

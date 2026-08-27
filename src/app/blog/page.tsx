@@ -1,20 +1,16 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import Breadcrumb from '@/components/layout/Breadcrumb';
-import LatestNewsSection from '@/components/home/LatestNewsSection';
+import ThemeDispatcher from '@/themes/ThemeDispatcher';
+import ExistingBlogPage from '@/themes/existing/ExistingBlogPage';
+import FintechBlogPage from '@/themes/fintech/FintechBlogPage';
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col font-sans">
-      <Header />
-      <main className="flex-1">
-        <Breadcrumb items={[{ label: 'Blog & Haberler' }]} />
-        <LatestNewsSection />
-      </main>
-      <Footer />
-    </div>
+    <ThemeDispatcher
+      existing={<ExistingBlogPage />}
+      fintech={<FintechBlogPage />}
+    />
   );
 }
+

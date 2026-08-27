@@ -1,20 +1,16 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import Breadcrumb from '@/components/layout/Breadcrumb';
-import ProjectsSection from '@/components/home/ProjectsSection';
+import ThemeDispatcher from '@/themes/ThemeDispatcher';
+import ExistingProjectsPage from '@/themes/existing/ExistingProjectsPage';
+import FintechProjectsPage from '@/themes/fintech/FintechProjectsPage';
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col font-sans">
-      <Header />
-      <main className="flex-1">
-        <Breadcrumb items={[{ label: 'Projeler' }]} />
-        <ProjectsSection />
-      </main>
-      <Footer />
-    </div>
+    <ThemeDispatcher
+      existing={<ExistingProjectsPage />}
+      fintech={<FintechProjectsPage />}
+    />
   );
 }
+
