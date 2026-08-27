@@ -39,7 +39,9 @@ import {
   Radio,
   SlidersHorizontal,
   Bell,
-  Layout
+  Layout,
+  Palette,
+  Monitor
 } from 'lucide-react';
 
 interface NavSubItem {
@@ -65,7 +67,7 @@ interface NavCategory {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, logout } = useAuthStore();
-  const { submissions, subscribers, testimonials, fetchCMSData } = useCMSStore();
+  const { settings, submissions, subscribers, testimonials, fetchCMSData } = useCMSStore();
 
   const [openCatIds, setOpenCatIds] = useState<Record<string, boolean>>({
     'site-mgmt': true,
@@ -92,7 +94,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: Settings,
       isCollapsible: true,
       items: [
-        { label: 'Genel Ayarlar & Logo', href: '/admin/settings', icon: Settings },
+        {
+          label: '🎨 Tema & Genel Ayarlar',
+          href: '/admin/settings',
+          icon: Palette,
+          badge: 'Çoklu Tema',
+          badgeColor: 'bg-blue-600 border-blue-600 text-white font-bold',
+        },
         { label: 'Header & Footer Yönetimi', href: '/admin/header-footer', icon: Layout },
         { label: 'Kullanıcı Yönetimi', href: '/admin/users', icon: Users },
         { label: 'Ana Sayfa Modül Sıralama', href: '/admin/sections', icon: SlidersHorizontal },
@@ -300,8 +308,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <p className="text-[11px] text-slate-400 font-medium">Tüm site içeriklerini ve gelen talepleri canlı güncelleyin.</p>
             </div>
 
-            <div className="flex items-center gap-4">
-              <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5">
+            <div className="flex items-center gap-3">
+              <Link
+                href="/admin/settings"
+                className="bg-slate-900 hover:bg-slate-800 text-white text-xs font-black px-3.5 py-1.5 rounded-xl border border-slate-700 flex items-center gap-2 shadow-sm transition-all"
+                title="Aktif Temayı Değiştir"
+              >
+                <Palette className="w-3.5 h-3.5 text-blue-400" />
+                <span>
+                  Aktif Tema: <strong className="text-emerald-400 underline">{settings?.themeId === 'theme-fintech' ? 'Fintech Teması' : 'Mevcut Tema'}</strong>
+                </span>
+              </Link>
+
+              <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                 <span>Sistem Aktif</span>
               </span>
