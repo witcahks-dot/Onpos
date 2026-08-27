@@ -24,8 +24,7 @@ export interface SiteSettings {
   };
   currency: string;
   language: string;
-  activeTheme?: 'theme1' | 'theme2' | 'light' | 'dark';
-  selectedTheme?: 'theme1' | 'theme2';
+  activeTheme: 'light' | 'dark';
   topbarText: string;
   headerStyle: 'standard' | 'minimal' | 'floating';
   footerStyle: 'full' | 'compact' | 'minimal';
