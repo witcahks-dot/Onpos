@@ -112,6 +112,74 @@ export function normalizeSiteSettings(raw?: Partial<SiteSettings> | null): SiteS
   };
 }
 
+/**
+ * Maps Supabase PostgreSQL snake_case row to TypeScript camelCase SiteSettings
+ */
+export function mapDbRowToSiteSettings(row: Record<string, any>): Partial<SiteSettings> {
+  if (!row || typeof row !== 'object') return {};
+  return {
+    siteName: row.site_name ?? row.siteName,
+    tagline: row.tagline,
+    logoUrl: row.logo_url ?? row.logoUrl,
+    faviconUrl: row.favicon_url ?? row.faviconUrl,
+    primaryColor: row.primary_color ?? row.primaryColor,
+    accentColor: row.accent_color ?? row.accentColor,
+    phone: row.phone,
+    phoneFormatted: row.phone_formatted ?? row.phoneFormatted,
+    email: row.email,
+    address: row.address,
+    workingHours: row.working_hours ?? row.workingHours,
+    socialLinks: row.social_links ?? row.socialLinks,
+    currency: row.currency,
+    language: row.language,
+    activeTheme: row.active_theme ?? row.activeTheme,
+    themeId: (row.theme_id ?? row.themeId) === 'theme-fintech' ? 'theme-fintech' : 'theme-existing',
+    topbarText: row.topbar_text ?? row.topbarText,
+    headerStyle: row.header_style ?? row.headerStyle,
+    footerStyle: row.footer_style ?? row.footerStyle,
+    showQuickContactButtons: row.show_quick_contact_buttons ?? row.showQuickContactButtons,
+    quickContactPosition: row.quick_contact_position ?? row.quickContactPosition,
+    quickContactPhone: row.quick_contact_phone ?? row.quickContactPhone,
+    quickContactWhatsapp: row.quick_contact_whatsapp ?? row.quickContactWhatsapp,
+    quickContactMessage: row.quick_contact_message ?? row.quickContactMessage,
+  };
+}
+
+/**
+ * Maps TypeScript camelCase SiteSettings to Supabase PostgreSQL snake_case row
+ */
+export function mapSiteSettingsToDbRow(settings: Partial<SiteSettings>): Record<string, any> {
+  const s = settings || {};
+  const row: Record<string, any> = {
+    id: 'default',
+    updated_at: new Date().toISOString(),
+  };
+
+  if (s.siteName !== undefined) row.site_name = s.siteName;
+  if (s.tagline !== undefined) row.tagline = s.tagline;
+  if (s.logoUrl !== undefined) row.logo_url = s.logoUrl;
+  if (s.faviconUrl !== undefined) row.favicon_url = s.faviconUrl;
+  if (s.primaryColor !== undefined) row.primary_color = s.primaryColor;
+  if (s.accentColor !== undefined) row.accent_color = s.accentColor;
+  if (s.phone !== undefined) row.phone = s.phone;
+  if (s.phoneFormatted !== undefined) row.phone_formatted = s.phoneFormatted;
+  if (s.email !== undefined) row.email = s.email;
+  if (s.address !== undefined) row.address = s.address;
+  if (s.workingHours !== undefined) row.working_hours = s.workingHours;
+  if (s.socialLinks !== undefined) row.social_links = s.socialLinks;
+  if (s.currency !== undefined) row.currency = s.currency;
+  if (s.language !== undefined) row.language = s.language;
+  if (s.activeTheme !== undefined) row.active_theme = s.activeTheme;
+  if (s.themeId !== undefined) {
+    row.theme_id = s.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+  }
+  if (s.topbarText !== undefined) row.topbar_text = s.topbarText;
+  if (s.headerStyle !== undefined) row.header_style = s.headerStyle;
+  if (s.footerStyle !== undefined) row.footer_style = s.footerStyle;
+
+  return row;
+}
+
 export function normalizePosProduct(raw: Partial<PosProduct>): PosProduct {
   return {
     id: raw.id || `p-${Date.now()}`,

@@ -148,13 +148,10 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       const rawData: CMSData = await res.json();
       const data = normalizeCMSData(rawData);
 
-      // Check client-side cookie override if available
-      if (typeof document !== 'undefined') {
-        const match = document.cookie.match(/paypos_theme_id=(theme-[a-z]+)/);
-        if (match && match[1] && (match[1] === 'theme-fintech' || match[1] === 'theme-existing')) {
-          data.settings.themeId = match[1] as any;
-          document.documentElement.setAttribute('data-theme', match[1]);
-        }
+      // Synchronize DOM and helper cookie with verified DB theme
+      if (data.settings?.themeId && typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', data.settings.themeId);
+        document.cookie = `paypos_theme_id=${data.settings.themeId}; path=/; max-age=31536000; SameSite=Lax;`;
       }
 
       set({ 

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readCMSData, writeCMSData } from '@/lib/cms-db';
+import { readCMSDataAsync, writeCMSDataAsync, readCMSData, writeCMSData } from '@/lib/cms-db';
 import { CMSData } from '@/types';
 import { quoteSubmissionSchema, newsletterSchema } from '@/lib/validations';
 import { ZodError } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -14,15 +15,7 @@ export async function GET(
   try {
     const resolvedParams = await params;
     const entity = resolvedParams.entity;
-    const data = readCMSData();
-
-    // Check if theme cookie is set and enforce it
-    const themeCookie = req.cookies.get('paypos_theme_id')?.value;
-    if (themeCookie === 'theme-fintech' || themeCookie === 'theme-existing') {
-      if (data.settings) {
-        data.settings.themeId = themeCookie;
-      }
-    }
+    const data = await readCMSDataAsync();
 
     if (entity === 'all') {
       return NextResponse.json(data);
@@ -48,7 +41,7 @@ export async function POST(
     const resolvedParams = await params;
     const entity = resolvedParams.entity;
     const body = await req.json();
-    const currentData = readCMSData();
+    const currentData = await readCMSDataAsync();
 
     // 1. Validated Lead & Quote Form Submission
     if (entity === 'quote-submit') {
@@ -60,7 +53,7 @@ export async function POST(
         ...validatedData,
       };
       const updatedSubmissions = [newSubmission, ...(currentData.submissions || [])];
-      writeCMSData({ submissions: updatedSubmissions });
+      await writeCMSDataAsync({ submissions: updatedSubmissions });
       return NextResponse.json({ success: true, message: 'Başvurunuz başarıyla kaydedildi.', data: newSubmission }, { status: 201 });
     }
 
@@ -78,14 +71,32 @@ export async function POST(
         createdAt: new Date().toLocaleString('tr-TR'),
       };
       const updatedSubs = [newSubscriber, ...currentSubs];
-      writeCMSData({ subscribers: updatedSubs });
+      await writeCMSDataAsync({ subscribers: updatedSubs });
       return NextResponse.json({ success: true, message: 'Bülten kaydınız başarıyla oluşturuldu.', data: newSubscriber }, { status: 201 });
+    }
+
+    // 3. Settings Entity Special Write-Through
+    if (entity === 'settings') {
+      const updatedSettings = { ...(currentData.settings || {}), ...body };
+      const newCMS = await writeCMSDataAsync({ settings: updatedSettings });
+      
+      try {
+        revalidatePath('/', 'layout');
+      } catch (revErr) {
+        console.warn('Revalidate error:', revErr);
+      }
+
+      const res = NextResponse.json(newCMS.settings, { status: 200 });
+      if (newCMS.settings?.themeId) {
+        res.cookies.set('paypos_theme_id', newCMS.settings.themeId, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      }
+      return res;
     }
 
     // If body itself is an Array (e.g. full replacement for homeSections, menu, etc.)
     if (Array.isArray(body)) {
       const arrayKey = entity as keyof CMSData;
-      const newCMS = writeCMSData({ [arrayKey]: body });
+      const newCMS = await writeCMSDataAsync({ [arrayKey]: body });
       return NextResponse.json(newCMS[arrayKey], { status: 200 });
     }
 
@@ -97,33 +108,21 @@ export async function POST(
       const currentArray = (currentData[arrayKey] as unknown[]) || [];
       const newItem = { id: body.id || `${entity}-${Date.now()}`, ...body };
       const updatedArray = [newItem, ...currentArray];
-      const newCMS = writeCMSData({ [arrayKey]: updatedArray });
+      const newCMS = await writeCMSDataAsync({ [arrayKey]: updatedArray });
       return NextResponse.json(newItem, { status: 201 });
     }
 
-    // If target entity is an Object (e.g. corporateIntro, cloudPanel, settings)
+    // If target entity is an Object (e.g. corporateIntro, cloudPanel)
     if (typeof currentEntityVal === 'object' && currentEntityVal !== null) {
       const objKey = entity as keyof CMSData;
       const updatedObj = { ...currentEntityVal, ...body };
-      const newCMS = writeCMSData({ [objKey]: updatedObj });
-      const res = NextResponse.json(newCMS[objKey], { status: 200 });
-      
-      // If updating settings and themeId is provided, persist cookie
-      if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
-        const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
-        res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-      }
-      return res;
+      const newCMS = await writeCMSDataAsync({ [objKey]: updatedObj });
+      return NextResponse.json(newCMS[objKey], { status: 200 });
     }
 
     // If target entity doesn't exist yet, save it directly
-    const newCMS = writeCMSData({ [entity]: body });
-    const res = NextResponse.json(newCMS[entity as keyof CMSData], { status: 200 });
-    if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
-      const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
-      res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-    }
-    return res;
+    const newCMS = await writeCMSDataAsync({ [entity]: body });
+    return NextResponse.json(newCMS[entity as keyof CMSData], { status: 200 });
   } catch (error: unknown) {
     if (error instanceof ZodError) {
       const fieldErrors = error.flatten().fieldErrors;
@@ -134,7 +133,8 @@ export async function POST(
       );
     }
     console.error('API POST error:', error);
-    return NextResponse.json({ success: false, message: 'İşlem sırasında bir hata oluştu.' }, { status: 500 });
+    const msg = error instanceof Error ? error.message : 'İşlem sırasında bir hata oluştu.';
+    return NextResponse.json({ success: false, message: msg }, { status: 500 });
   }
 }
 
@@ -146,7 +146,25 @@ export async function PUT(
     const resolvedParams = await params;
     const entity = resolvedParams.entity;
     const body = await req.json();
-    const currentData = readCMSData();
+    const currentData = await readCMSDataAsync();
+
+    // Settings Entity Special Write-Through
+    if (entity === 'settings') {
+      const updatedSettings = { ...(currentData.settings || {}), ...body };
+      const newCMS = await writeCMSDataAsync({ settings: updatedSettings });
+      
+      try {
+        revalidatePath('/', 'layout');
+      } catch (revErr) {
+        console.warn('Revalidate error:', revErr);
+      }
+
+      const res = NextResponse.json(newCMS.settings, { status: 200 });
+      if (newCMS.settings?.themeId) {
+        res.cookies.set('paypos_theme_id', newCMS.settings.themeId, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      }
+      return res;
+    }
 
     const currentEntityVal = (currentData as unknown as Record<string, unknown>)[entity];
 
@@ -156,41 +174,32 @@ export async function PUT(
       
       // Full array replacement (e.g. stats, reordered menu, reordered slides)
       if (Array.isArray(body)) {
-        const newCMS = writeCMSData({ [arrayKey]: body });
+        const newCMS = await writeCMSDataAsync({ [arrayKey]: body });
         return NextResponse.json(newCMS[arrayKey]);
       }
 
       // Single item update inside array by id
       const currentArray = (currentData[arrayKey] as Array<{ id: string }>) || [];
       const updatedArray = currentArray.map(item => item.id === body.id ? { ...item, ...body } : item);
-      const newCMS = writeCMSData({ [arrayKey]: updatedArray });
+      const newCMS = await writeCMSDataAsync({ [arrayKey]: updatedArray });
       return NextResponse.json(newCMS[arrayKey]);
     }
 
-    // If target entity is an Object (e.g. corporateIntro, cloudPanel, settings)
+    // If target entity is an Object (e.g. corporateIntro, cloudPanel)
     if (typeof currentEntityVal === 'object' && currentEntityVal !== null) {
       const objKey = entity as keyof CMSData;
       const updatedObj = { ...currentEntityVal, ...body };
-      const newCMS = writeCMSData({ [objKey]: updatedObj });
-      const res = NextResponse.json(newCMS[objKey]);
-      if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
-        const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
-        res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-      }
-      return res;
+      const newCMS = await writeCMSDataAsync({ [objKey]: updatedObj });
+      return NextResponse.json(newCMS[objKey]);
     }
 
     // Fallback: update entity directly
-    const newCMS = writeCMSData({ [entity]: body });
-    const res = NextResponse.json(newCMS[entity as keyof CMSData]);
-    if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
-      const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
-      res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-    }
-    return res;
-  } catch (error) {
+    const newCMS = await writeCMSDataAsync({ [entity]: body });
+    return NextResponse.json(newCMS[entity as keyof CMSData]);
+  } catch (error: unknown) {
     console.error('API PUT error:', error);
-    return NextResponse.json({ error: 'Failed to update item.' }, { status: 500 });
+    const msg = error instanceof Error ? error.message : 'Failed to update item.';
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
 

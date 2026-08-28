@@ -1,4 +1,4 @@
-import { readCMSData } from './cms-db';
+import { readCMSData, readCMSDataAsync } from './cms-db';
 import {
   normalizeCMSData,
   normalizeSiteSettings,
@@ -29,8 +29,19 @@ export function getCMSData(): CMSData {
   return normalizeCMSData(raw);
 }
 
+export async function getCMSDataAsync(): Promise<CMSData> {
+  const raw = await readCMSDataAsync();
+  return normalizeCMSData(raw);
+}
+
 export function getActiveTheme(): ThemeId {
   const settings = getSettings();
+  return resolveActiveTheme(settings);
+}
+
+export async function getActiveThemeAsync(): Promise<ThemeId> {
+  const data = await getCMSDataAsync();
+  const settings = normalizeSiteSettings(data.settings);
   return resolveActiveTheme(settings);
 }
 

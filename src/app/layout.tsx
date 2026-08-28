@@ -62,15 +62,24 @@ export const metadata: Metadata = {
 };
 
 import { cookies } from "next/headers";
+import { getActiveThemeAsync } from "@/lib/cms-repository";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get("paypos_theme_id")?.value;
-  const initialTheme = themeCookie === "theme-fintech" ? "theme-fintech" : "theme-existing";
+  let initialTheme = "theme-existing";
+  try {
+    const dbTheme = await getActiveThemeAsync();
+    const cookieStore = await cookies();
+    const themeCookie = cookieStore.get("paypos_theme_id")?.value;
+    
+    // DB is source of truth; cookie is secondary hint
+    initialTheme = dbTheme || (themeCookie === "theme-fintech" ? "theme-fintech" : "theme-existing");
+  } catch {
+    initialTheme = "theme-existing";
+  }
 
   return (
     <html

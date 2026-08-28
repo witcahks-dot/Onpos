@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { CMSData } from '@/types';
+import { CMSData, SiteSettings } from '@/types';
 import { defaultCMSData } from './default-data';
-import { normalizeCMSData } from './data-normalizers';
-import { isSupabaseConfigured, supabase } from './supabase';
+import { normalizeCMSData, normalizeSiteSettings, mapDbRowToSiteSettings, mapSiteSettingsToDbRow } from './data-normalizers';
+import { isSupabaseConfigured, getSupabaseServerClient, supabase } from './supabase';
 
 // Store DB outside `src/` to prevent Next.js dev server from triggering file-watcher HMR reboots on file write
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -25,6 +25,9 @@ function ensureDataDirectory() {
   }
 }
 
+/**
+ * Synchronous local reader with /tmp and filesystem fallback
+ */
 export function readCMSData(): CMSData {
   if (inMemoryCache) {
     return inMemoryCache;
@@ -81,6 +84,46 @@ export function readCMSData(): CMSData {
   }
 }
 
+/**
+ * Asynchronous reader with true Supabase DB Read-Through
+ */
+export async function readCMSDataAsync(): Promise<CMSData> {
+  const base = readCMSData();
+
+  if (isSupabaseConfigured) {
+    try {
+      const client = getSupabaseServerClient();
+      if (client) {
+        const { data, error } = await client
+          .from('settings')
+          .select('*')
+          .eq('id', 'default')
+          .single();
+
+        if (data && !error) {
+          const dbSettings = mapDbRowToSiteSettings(data);
+          const merged: CMSData = {
+            ...base,
+            settings: normalizeSiteSettings({ ...base.settings, ...dbSettings }),
+          };
+          inMemoryCache = merged;
+          return merged;
+        } else if (error) {
+          console.warn('[cms-db] Supabase settings query warning (using local fallback):', error.message);
+        }
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Unknown DB error';
+      console.warn('[cms-db] Supabase connection error (using local fallback):', msg);
+    }
+  }
+
+  return base;
+}
+
+/**
+ * Synchronous local writer (updates memory, /tmp and local file)
+ */
 export function writeCMSData(data: Partial<CMSData>): CMSData {
   ensureDataDirectory();
   try {
@@ -110,7 +153,6 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
     try {
       fs.writeFileSync(DB_FILE, JSON.stringify(normalized, null, 2), 'utf-8');
     } catch (fsErr) {
-      // In serverless read-only filesystem, silently fallback to /tmp & cookie persistence
       console.warn('Primary DB_FILE is read-only in this environment, persisted to /tmp:', fsErr);
     }
 
@@ -123,15 +165,9 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
       // ignore legacy file write warning
     }
 
-    // 4. Async sync to Supabase if configured
-    if (isSupabaseConfigured && supabase) {
-      syncToSupabase(data).catch(err => console.error('Supabase async sync error:', err));
-    }
-
     return normalized;
   } catch (error) {
     console.error('Error writing CMS database file:', error);
-    // Return inMemoryCache if available so the request does not fail
     if (inMemoryCache) {
       return inMemoryCache;
     }
@@ -139,13 +175,39 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
   }
 }
 
-async function syncToSupabase(data: Partial<CMSData>) {
-  if (!supabase) return;
-  try {
-    if (data.settings) {
-      await supabase.from('settings').upsert({ id: 'default', ...data.settings });
+/**
+ * Asynchronous writer with true Supabase DB Write-Through & Verification
+ */
+export async function writeCMSDataAsync(data: Partial<CMSData>): Promise<CMSData> {
+  if (data.settings && isSupabaseConfigured) {
+    const client = getSupabaseServerClient();
+    if (client) {
+      const dbRow = mapSiteSettingsToDbRow(data.settings);
+      
+      // 1. Guaranteed await on DB upsert
+      const { error: upsertErr } = await client
+        .from('settings')
+        .upsert(dbRow, { onConflict: 'id' });
+
+      if (upsertErr) {
+        console.error('[cms-db] Supabase settings write-through error:', upsertErr);
+        throw new Error('Veritabanına ayarlar kaydedilemedi: ' + upsertErr.message);
+      }
+
+      // 2. Re-read from production DB to confirm and verify written value
+      const { data: verifiedRow, error: verifyErr } = await client
+        .from('settings')
+        .select('*')
+        .eq('id', 'default')
+        .single();
+
+      if (verifiedRow && !verifyErr) {
+        const verifiedSettings = normalizeSiteSettings(mapDbRowToSiteSettings(verifiedRow));
+        data.settings = verifiedSettings;
+      }
     }
-  } catch (err) {
-    console.error('Supabase sync error:', err);
   }
+
+  // Persist locally / in-memory as well
+  return writeCMSData(data);
 }
