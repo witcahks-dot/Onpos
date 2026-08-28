@@ -8,6 +8,7 @@ import { isSupabaseConfigured, supabase } from './supabase';
 // Store DB outside `src/` to prevent Next.js dev server from triggering file-watcher HMR reboots on file write
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'cms-db.json');
+const TMP_DB_FILE = path.join('/tmp', 'paypos-cms-db.json');
 const LEGACY_DB_FILE = path.join(process.cwd(), 'src', 'data', 'cms-db.json');
 
 export { defaultCMSData };
@@ -15,8 +16,12 @@ export { defaultCMSData };
 let inMemoryCache: CMSData | null = null;
 
 function ensureDataDirectory() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+  } catch {
+    // Ignore read-only directory creation errors in serverless
   }
 }
 
@@ -29,27 +34,46 @@ export function readCMSData(): CMSData {
   try {
     let rawContent: string | null = null;
 
-    if (fs.existsSync(DB_FILE)) {
-      rawContent = fs.readFileSync(DB_FILE, 'utf-8');
-    } else if (fs.existsSync(LEGACY_DB_FILE)) {
-      rawContent = fs.readFileSync(LEGACY_DB_FILE, 'utf-8');
+    // 1. Check /tmp fallback first (writable in serverless lambda)
+    if (fs.existsSync(TMP_DB_FILE)) {
+      try {
+        rawContent = fs.readFileSync(TMP_DB_FILE, 'utf-8');
+      } catch (e) {
+        console.warn('Could not read TMP_DB_FILE:', e);
+      }
+    }
+
+    // 2. Check primary DB_FILE
+    if (!rawContent && fs.existsSync(DB_FILE)) {
+      try {
+        rawContent = fs.readFileSync(DB_FILE, 'utf-8');
+      } catch (e) {
+        console.warn('Could not read DB_FILE:', e);
+      }
+    }
+
+    // 3. Check legacy DB file
+    if (!rawContent && fs.existsSync(LEGACY_DB_FILE)) {
+      try {
+        rawContent = fs.readFileSync(LEGACY_DB_FILE, 'utf-8');
+      } catch (e) {
+        console.warn('Could not read LEGACY_DB_FILE:', e);
+      }
     }
 
     if (rawContent) {
       const parsed = JSON.parse(rawContent);
       const data = normalizeCMSData(parsed);
       inMemoryCache = data;
-      
-      try {
-        fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-      } catch (e) {
-        console.error('Initial DB_FILE write error:', e);
-      }
       return data;
     }
 
     inMemoryCache = defaultCMSData;
-    fs.writeFileSync(DB_FILE, JSON.stringify(defaultCMSData, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(TMP_DB_FILE, JSON.stringify(defaultCMSData, null, 2), 'utf-8');
+    } catch {
+      // ignore
+    }
     return inMemoryCache;
   } catch (error) {
     console.error('Error reading CMS database file:', error);
@@ -75,10 +99,22 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
     // Update in-memory singleton cache immediately
     inMemoryCache = normalized;
 
-    // Write to primary database file outside src/
-    fs.writeFileSync(DB_FILE, JSON.stringify(normalized, null, 2), 'utf-8');
+    // 1. Write to /tmp database file (guaranteed writable in AWS Lambda / Vercel Serverless)
+    try {
+      fs.writeFileSync(TMP_DB_FILE, JSON.stringify(normalized, null, 2), 'utf-8');
+    } catch (tmpErr) {
+      console.warn('Could not write to TMP_DB_FILE:', tmpErr);
+    }
 
-    // Also update legacy file if present without breaking
+    // 2. Attempt to write to primary database file (works in local dev / persistent container)
+    try {
+      fs.writeFileSync(DB_FILE, JSON.stringify(normalized, null, 2), 'utf-8');
+    } catch (fsErr) {
+      // In serverless read-only filesystem, silently fallback to /tmp & cookie persistence
+      console.warn('Primary DB_FILE is read-only in this environment, persisted to /tmp:', fsErr);
+    }
+
+    // 3. Also update legacy file if present without breaking
     try {
       if (fs.existsSync(LEGACY_DB_FILE)) {
         fs.writeFileSync(LEGACY_DB_FILE, JSON.stringify(normalized, null, 2), 'utf-8');
@@ -87,7 +123,7 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
       // ignore legacy file write warning
     }
 
-    // Async sync to Supabase if configured
+    // 4. Async sync to Supabase if configured
     if (isSupabaseConfigured && supabase) {
       syncToSupabase(data).catch(err => console.error('Supabase async sync error:', err));
     }
@@ -95,6 +131,10 @@ export function writeCMSData(data: Partial<CMSData>): CMSData {
     return normalized;
   } catch (error) {
     console.error('Error writing CMS database file:', error);
+    // Return inMemoryCache if available so the request does not fail
+    if (inMemoryCache) {
+      return inMemoryCache;
+    }
     throw error;
   }
 }

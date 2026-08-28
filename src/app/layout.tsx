@@ -61,14 +61,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+import { cookies } from "next/headers";
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("paypos_theme_id")?.value;
+  const initialTheme = themeCookie === "theme-fintech" ? "theme-fintech" : "theme-existing";
+
   return (
     <html
       lang="tr"
+      data-theme={initialTheme}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

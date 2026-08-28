@@ -11,7 +11,15 @@ interface ThemeDispatcherProps {
 
 export default function ThemeDispatcher({ existing, fintech }: ThemeDispatcherProps) {
   const { settings } = useCMSStore();
-  const activeTheme: ThemeId = (settings?.themeId === 'theme-fintech') ? 'theme-fintech' : 'theme-existing';
+  
+  let activeTheme: ThemeId = (settings?.themeId === 'theme-fintech') ? 'theme-fintech' : 'theme-existing';
+
+  if (typeof document !== 'undefined') {
+    const match = document.cookie.match(/paypos_theme_id=(theme-[a-z]+)/);
+    if (match && match[1] && (match[1] === 'theme-fintech' || match[1] === 'theme-existing')) {
+      activeTheme = match[1] as ThemeId;
+    }
+  }
 
   if (activeTheme === 'theme-fintech') {
     return <>{fintech}</>;

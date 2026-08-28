@@ -31,7 +31,7 @@ import {
   FooterConfig
 } from '@/types';
 import { defaultCMSData } from './default-data';
-import { normalizeCMSData } from './data-normalizers';
+import { normalizeCMSData, normalizeSiteSettings } from './data-normalizers';
 
 interface CMSStoreState extends CMSData {
   isLoading: boolean;
@@ -147,6 +147,16 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
       if (!res.ok) throw new Error('Failed to fetch CMS data');
       const rawData: CMSData = await res.json();
       const data = normalizeCMSData(rawData);
+
+      // Check client-side cookie override if available
+      if (typeof document !== 'undefined') {
+        const match = document.cookie.match(/paypos_theme_id=(theme-[a-z]+)/);
+        if (match && match[1] && (match[1] === 'theme-fintech' || match[1] === 'theme-existing')) {
+          data.settings.themeId = match[1] as any;
+          document.documentElement.setAttribute('data-theme', match[1]);
+        }
+      }
+
       set({ 
         ...data, 
         adminUsers: data.adminUsers || defaultCMSData.adminUsers || [],
@@ -164,13 +174,30 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
     try {
       const merged = { ...get().settings, ...newSettings };
       set({ settings: merged });
-      await fetch('/api/cms/settings', {
+
+      // Immediate client-side cookie & DOM update for instant reactivity
+      if (typeof document !== 'undefined' && newSettings.themeId) {
+        document.cookie = `paypos_theme_id=${newSettings.themeId}; path=/; max-age=31536000; SameSite=Lax;`;
+        document.documentElement.setAttribute('data-theme', newSettings.themeId);
+      }
+
+      const res = await fetch('/api/cms/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSettings),
       });
+
+      if (!res.ok) {
+        throw new Error('Ayar kaydedilirken sunucu hatası oluştu');
+      }
+
+      const saved = await res.json();
+      if (saved && typeof saved === 'object') {
+        set({ settings: normalizeSiteSettings({ ...merged, ...saved }) });
+      }
     } catch (err) {
       console.error('Failed to save settings:', err);
+      throw err;
     }
   },
 

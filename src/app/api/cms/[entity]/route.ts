@@ -16,6 +16,14 @@ export async function GET(
     const entity = resolvedParams.entity;
     const data = readCMSData();
 
+    // Check if theme cookie is set and enforce it
+    const themeCookie = req.cookies.get('paypos_theme_id')?.value;
+    if (themeCookie === 'theme-fintech' || themeCookie === 'theme-existing') {
+      if (data.settings) {
+        data.settings.themeId = themeCookie;
+      }
+    }
+
     if (entity === 'all') {
       return NextResponse.json(data);
     }
@@ -98,12 +106,24 @@ export async function POST(
       const objKey = entity as keyof CMSData;
       const updatedObj = { ...currentEntityVal, ...body };
       const newCMS = writeCMSData({ [objKey]: updatedObj });
-      return NextResponse.json(newCMS[objKey], { status: 200 });
+      const res = NextResponse.json(newCMS[objKey], { status: 200 });
+      
+      // If updating settings and themeId is provided, persist cookie
+      if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
+        const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+        res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      }
+      return res;
     }
 
     // If target entity doesn't exist yet, save it directly
     const newCMS = writeCMSData({ [entity]: body });
-    return NextResponse.json(newCMS[entity as keyof CMSData], { status: 200 });
+    const res = NextResponse.json(newCMS[entity as keyof CMSData], { status: 200 });
+    if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
+      const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+      res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    }
+    return res;
   } catch (error: unknown) {
     if (error instanceof ZodError) {
       const fieldErrors = error.flatten().fieldErrors;
@@ -152,12 +172,22 @@ export async function PUT(
       const objKey = entity as keyof CMSData;
       const updatedObj = { ...currentEntityVal, ...body };
       const newCMS = writeCMSData({ [objKey]: updatedObj });
-      return NextResponse.json(newCMS[objKey]);
+      const res = NextResponse.json(newCMS[objKey]);
+      if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
+        const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+        res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      }
+      return res;
     }
 
     // Fallback: update entity directly
     const newCMS = writeCMSData({ [entity]: body });
-    return NextResponse.json(newCMS[entity as keyof CMSData]);
+    const res = NextResponse.json(newCMS[entity as keyof CMSData]);
+    if (entity === 'settings' && body && typeof body === 'object' && 'themeId' in body) {
+      const theme = body.themeId === 'theme-fintech' ? 'theme-fintech' : 'theme-existing';
+      res.cookies.set('paypos_theme_id', theme, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    }
+    return res;
   } catch (error) {
     console.error('API PUT error:', error);
     return NextResponse.json({ error: 'Failed to update item.' }, { status: 500 });

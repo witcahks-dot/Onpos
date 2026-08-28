@@ -19,6 +19,7 @@ import {
   Monitor
 } from 'lucide-react';
 import { ThemeId } from '@/types';
+import { AlertCircle } from 'lucide-react';
 
 export default function AdminSettingsPage() {
   const { settings, updateSettings } = useCMSStore();
@@ -34,6 +35,25 @@ export default function AdminSettingsPage() {
     quickContactMessage: settings.quickContactMessage || 'Merhaba, POS cihazları ve ödeme çözümleri hakkında hızlı bilgi almak istiyorum.',
   });
   const [saved, setSaved] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Sync form when settings are hydrated from API
+  React.useEffect(() => {
+    if (settings) {
+      setForm(prev => ({
+        ...prev,
+        ...settings,
+        themeId: (settings.themeId || 'theme-existing') as ThemeId,
+        logoHeight: settings.logoHeight || 40,
+        showLogoText: settings.showLogoText !== false,
+        showQuickContactButtons: settings.showQuickContactButtons !== false,
+        quickContactPosition: settings.quickContactPosition || 'left',
+        quickContactPhone: settings.quickContactPhone || settings.phoneFormatted || '0530 417 15 65',
+        quickContactWhatsapp: settings.quickContactWhatsapp || '905304171565',
+        quickContactMessage: settings.quickContactMessage || 'Merhaba, POS cihazları ve ödeme çözümleri hakkında hızlı bilgi almak istiyorum.',
+      }));
+    }
+  }, [settings]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -55,9 +75,15 @@ export default function AdminSettingsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateSettings(form);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    setErrorMsg(null);
+    try {
+      await updateSettings(form);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Ayarlar kaydedilirken bir hata oluştu.';
+      setErrorMsg(msg);
+    }
   };
 
   const stockLogos = [
@@ -109,6 +135,13 @@ export default function AdminSettingsPage() {
         <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-200 flex items-center gap-2 text-xs font-bold animate-in fade-in">
           <CheckCircle2 className="w-4 h-4" />
           <span>Ayarlar ve tema seçimi başarıyla kaydedildi! Canlı sitede anında aktif edildi.</span>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div className="bg-rose-50 text-rose-700 p-4 rounded-xl border border-rose-200 flex items-center gap-2 text-xs font-bold animate-in fade-in">
+          <AlertCircle className="w-4 h-4 text-rose-600" />
+          <span>{errorMsg}</span>
         </div>
       )}
 
