@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCMSStore } from '@/lib/cms-store';
+import { SiteSettings, CMSData } from '@/types';
 import FloatingQuickContact from '@/components/layout/FloatingQuickContact';
 
 function hexToRgb(hex: string): string {
@@ -19,9 +20,21 @@ function hexToRgb(hex: string): string {
   return `${r}, ${g}, ${b}`;
 }
 
-export default function CMSHydrator() {
+interface CMSHydratorProps {
+  initialSettings?: Partial<SiteSettings>;
+  initialData?: Partial<CMSData>;
+}
+
+export default function CMSHydrator({ initialSettings, initialData }: CMSHydratorProps) {
   const pathname = usePathname();
-  const { fetchCMSData, settings } = useCMSStore();
+  const { fetchCMSData, initServerData, settings } = useCMSStore();
+  const initializedRef = useRef(false);
+
+  // Synchronously seed the client store with verified SSR settings before any child renders
+  if (!initializedRef.current && (initialSettings || initialData)) {
+    initializedRef.current = true;
+    initServerData(initialData || { settings: initialSettings });
+  }
 
   useEffect(() => {
     fetchCMSData();

@@ -47,6 +47,7 @@ interface CMSStoreState extends CMSData {
   updateFooterConfig: (config: Partial<FooterConfig>) => Promise<void>;
   
   // Actions
+  initServerData: (serverData?: { settings?: Partial<SiteSettings> } & Partial<Omit<CMSData, 'settings'>>) => void;
   fetchCMSData: () => Promise<void>;
   updateSettings: (settings: Partial<SiteSettings>) => Promise<void>;
   updateHomeSections: (sections: HomeSectionConfig[]) => Promise<void>;
@@ -139,6 +140,23 @@ export const useCMSStore = create<CMSStoreState>((set, get) => ({
   },
   isLoading: false,
   error: null,
+
+  initServerData: (serverData) => {
+    if (!serverData) return;
+    const current = get();
+    const mergedSettings = serverData.settings 
+      ? normalizeSiteSettings({ ...current.settings, ...serverData.settings })
+      : current.settings;
+    
+    if (mergedSettings.themeId && typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', mergedSettings.themeId);
+    }
+
+    set({
+      ...serverData,
+      settings: mergedSettings,
+    });
+  },
 
   fetchCMSData: async () => {
     try {

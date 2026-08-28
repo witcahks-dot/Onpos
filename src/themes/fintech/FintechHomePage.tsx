@@ -14,12 +14,6 @@ import FintechSubscribeBanner from './components/FintechSubscribeBanner';
 import FintechGrowthCta from './components/FintechGrowthCta';
 
 export default function FintechHomePage() {
-  const { fetchCMSData } = useCMSStore();
-
-  useEffect(() => {
-    fetchCMSData();
-  }, [fetchCMSData]);
-
   return (
     <FintechThemeShell>
       {/* 1. Fintech Hero with Advisor & 12+ Years Badge */}

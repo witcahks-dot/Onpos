@@ -22,11 +22,7 @@ import TestimonialSlider from '@/components/home/TestimonialSlider';
 import TrustStats from '@/components/home/TrustStats';
 
 export default function ExistingHomePage() {
-  const { homeSections, fetchCMSData } = useCMSStore();
-
-  useEffect(() => {
-    fetchCMSData();
-  }, [fetchCMSData]);
+  const { homeSections } = useCMSStore();
 
   // Section Component Registry
   const renderSectionComponent = (id: string) => {

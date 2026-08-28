@@ -62,21 +62,26 @@ export const metadata: Metadata = {
 };
 
 import { cookies } from "next/headers";
-import { getActiveThemeAsync } from "@/lib/cms-repository";
+import { getActiveThemeAsync, getSettings } from "@/lib/cms-repository";
+import { defaultCMSData } from "@/lib/default-data";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  let initialSettings = defaultCMSData.settings;
   let initialTheme = "theme-existing";
+
   try {
     const dbTheme = await getActiveThemeAsync();
+    const settings = getSettings();
     const cookieStore = await cookies();
     const themeCookie = cookieStore.get("paypos_theme_id")?.value;
     
     // DB is source of truth; cookie is secondary hint
     initialTheme = dbTheme || (themeCookie === "theme-fintech" ? "theme-fintech" : "theme-existing");
+    initialSettings = { ...settings, themeId: initialTheme as any };
   } catch {
     initialTheme = "theme-existing";
   }
@@ -88,7 +93,7 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <CMSHydrator />
+        <CMSHydrator initialSettings={initialSettings} />
         {children}
       </body>
     </html>
