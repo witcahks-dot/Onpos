@@ -73,3 +73,45 @@ export const newsletterSchema = z.object({
     .max(120, 'E-posta adresi çok uzun.')
     .transform(sanitizeInput),
 });
+
+/**
+ * Settings & Theme Update Validation Schema
+ */
+export const settingsUpdateSchema = z.object({
+  themeId: z.enum(['theme-existing', 'theme-fintech']).optional(),
+  activeTheme: z.enum(['light', 'dark']).optional(),
+  siteName: z.string().optional(),
+  tagline: z.string().optional(),
+  logoUrl: z.string().optional(),
+  faviconUrl: z.string().optional(),
+  logoHeight: z.number().optional(),
+  showLogoText: z.boolean().optional(),
+  primaryColor: z.string().optional(),
+  accentColor: z.string().optional(),
+  colorPreset: z.enum(['corporate-blue', 'indigo-violet', 'emerald-teal', 'slate-black', 'midnight-navy']).optional(),
+  layoutDensity: z.enum(['spacious', 'balanced', 'compact']).optional(),
+  cardStyle: z.enum(['soft-border', 'elevated-shadow', 'minimal-flat']).optional(),
+  phone: z.string().optional(),
+  phoneFormatted: z.string().optional(),
+  email: z.string().optional(),
+  address: z.string().optional(),
+  workingHours: z.string().optional(),
+  currency: z.string().optional(),
+  language: z.string().optional(),
+  topbarText: z.string().optional(),
+  headerStyle: z.enum(['standard', 'minimal', 'floating']).optional(),
+  footerStyle: z.enum(['full', 'compact', 'minimal']).optional(),
+  socialLinks: z.object({
+    whatsapp: z.string().optional(),
+    telegram: z.string().optional(),
+    instagram: z.string().optional(),
+    linkedin: z.string().optional(),
+    youtube: z.string().optional(),
+  }).optional(),
+  showQuickContactButtons: z.boolean().optional(),
+  quickContactPosition: z.enum(['left', 'right']).optional(),
+  quickContactPhone: z.string().optional(),
+  quickContactWhatsapp: z.string().optional(),
+  quickContactMessage: z.string().optional(),
+}).passthrough();
+

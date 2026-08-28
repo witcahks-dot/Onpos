@@ -70,7 +70,7 @@ export function formatCurrency(amount?: number | null, currencySymbol = '₺'): 
 // 3. ENTITY NORMALIZERS (DTO ADAPTERS)
 // ============================================================================
 
-export function normalizeSiteSettings(raw?: Partial<SiteSettings> | null): SiteSettings {
+export function normalizeSiteSettings(raw?: any): SiteSettings {
   const def = defaultCMSData.settings;
   const s = raw || {};
   return {

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readCMSDataAsync, writeCMSDataAsync, readCMSData, writeCMSData } from '@/lib/cms-db';
 import { CMSData } from '@/types';
-import { quoteSubmissionSchema, newsletterSchema } from '@/lib/validations';
+import { quoteSubmissionSchema, newsletterSchema, settingsUpdateSchema } from '@/lib/validations';
+import { normalizeSiteSettings } from '@/lib/data-normalizers';
 import { ZodError } from 'zod';
 import { revalidatePath } from 'next/cache';
 
@@ -77,7 +78,8 @@ export async function POST(
 
     // 3. Settings Entity Special Write-Through
     if (entity === 'settings') {
-      const updatedSettings = { ...(currentData.settings || {}), ...body };
+      const validatedSettings = settingsUpdateSchema.parse(body);
+      const updatedSettings = normalizeSiteSettings({ ...(currentData.settings || {}), ...validatedSettings });
       const newCMS = await writeCMSDataAsync({ settings: updatedSettings });
       
       try {
@@ -150,7 +152,8 @@ export async function PUT(
 
     // Settings Entity Special Write-Through
     if (entity === 'settings') {
-      const updatedSettings = { ...(currentData.settings || {}), ...body };
+      const validatedSettings = settingsUpdateSchema.parse(body);
+      const updatedSettings = normalizeSiteSettings({ ...(currentData.settings || {}), ...validatedSettings });
       const newCMS = await writeCMSDataAsync({ settings: updatedSettings });
       
       try {
